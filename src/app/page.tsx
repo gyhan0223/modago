@@ -7,6 +7,12 @@ export default function Home() {
   return (
     <main className="bg-white text-gray-900">
       {/* Hero Section */}
+      <section
+        className="relative min-h-[100vh] flex flex-col items-center justify-center text-center px-6 bg-cover bg-center"
+        style={{ backgroundImage: "url('/hero.png')" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+      </section>
       <section className="min-h-[100vh] flex flex-col items-center justify-center text-center px-6">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -18,12 +24,11 @@ export default function Home() {
           <br />
           <span className="text-brand">모두다른고양이 입시미술학원</span>
         </motion.h1>
-
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 1 }}
-          className="mt-6 text-gray-600 text-lg md:text-xl"
+          className="mt-6 text-gray-100 text-lg md:text-xl"
         >
           당신의 예술은 세상에 단 하나입니다.
         </motion.p>
