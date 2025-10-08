@@ -9,7 +9,9 @@ import Link from "next/link";
  */
 export default function NavBarSticky() {
   const [pinned, setPinned] = useState(false);
+  const [navHeight, setNavHeight] = useState(0);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const el = sentinelRef.current;
@@ -22,14 +24,37 @@ export default function NavBarSticky() {
     return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+
+    const updateHeight = () => {
+      setNavHeight(nav.getBoundingClientRect().height);
+    };
+
+    updateHeight();
+
+    if (typeof ResizeObserver !== "undefined") {
+      const ro = new ResizeObserver(updateHeight);
+      ro.observe(nav);
+      return () => ro.disconnect();
+    }
+
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
   return (
-    <div className="relative z-40">
+    <div className="relative">
       {/* sentinel: 이 선이 화면 상단 밖으로 나가면 pinned=true */}
       <div ref={sentinelRef} aria-hidden className="h-0" />
+      {pinned ? <div aria-hidden style={{ height: navHeight }} /> : null}
 
       <nav
+        ref={navRef}
         className={[
-          "sticky top-0",
+          pinned ? "fixed inset-x-0 top-0" : "relative",
+          "z-40 w-full",
           "transition-all duration-300",
           "backdrop-blur-md",
           // pinned 여부에 따라 불투명도/그림자/테두리 강화
