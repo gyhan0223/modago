@@ -19,7 +19,7 @@ function Counter({ to, run }: { to: number; run: boolean }) {
 export default function StatsCounter() {
   const stats = [
     { label: "누적 합격자", value: 128, suffix: "" },
-    { label: "전공 합격률", value: 92,  suffix: "%" },
+    { label: "전공 합격률", value: 92, suffix: "%" },
     { label: "연간 포트폴리오", value: 340, suffix: "" },
     // 필요하면 여기 더 추가
   ];
@@ -44,10 +44,12 @@ export default function StatsCounter() {
   return (
     <section ref={ref} className="py-[20vh] bg-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center">성과로 증명합니다</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center">
+          성과로 증명합니다
+        </h2>
 
         {/* 섹션 자체를 조금 길게 만들어 스크롤 여유 확보 */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 min-h-[60vh]">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8 min-h-[30vh]">
           {stats.map((s, i) => {
             const visible = i < showCount; // 지금까지 스크롤한 만큼만 보이게
             return (
