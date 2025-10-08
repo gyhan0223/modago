@@ -25,7 +25,7 @@ export default function Home() {
       {/* ▶️ 네비게이션 아래로 내려온 중앙 문구 */}
       <section
         id="after-hero"
-        className="pt-10 md:pt-14 pb-10 text-center px-6"
+        className="mt-12 md:mt-16 pt-10 md:pt-14 pb-10 text-center px-6 bg-brand-light/60"
       >
         <div className="max-w-5xl mx-auto">
           <motion.h1
@@ -53,31 +53,36 @@ export default function Home() {
       </section>
 
       {/* 이후 섹션들 */}
-      <section id="program" className="py-32 px-6 bg-brand/5">
+      <section id="philosophy" className="py-32 px-6 bg-brand/5">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold">프로그램</h2>
-          <p className="mt-4 text-gray-600">수준·전공별 맞춤 지도</p>
+          <h2 className="text-3xl md:text-5xl font-bold">철학</h2>
+          <p className="mt-4 text-gray-600">
+            “우리는 단순히 합격을 목표로 하지 않습니다. 예술가로서의 감각을
+            키우는 데 집중합니다.”
+          </p>
         </div>
       </section>
 
-      <section id="gallery" className="py-32 px-6">
+      <section id="education" className="py-32 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold">학생 작품 갤러리</h2>
-          {/* 갤러리 컴포넌트들… */}
+          <h2 className="text-3xl md:text-5xl font-bold">교육 방식</h2>
+          <p className="mt-4 text-gray-600">
+            “매일의 피드백, 개인 맞춤 커리큘럼, 그리고 진심 어린 지도.”
+          </p>
         </div>
       </section>
 
-      <section id="teachers" className="py-32 px-6 bg-brand/5">
+      <section id="result" className="py-32 px-6 bg-brand/5">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold">강사진</h2>
-          {/* 강사진 컴포넌트들… */}
+          <h2 className="text-3xl md:text-5xl font-bold">결과</h2>
+          <p className="mt-4 text-gray-600">
+            “누적 합격생 00명, 주요 예대 합격률 00%.”
+          </p>
         </div>
       </section>
 
       <section id="consult" className="py-32 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold">
-          지금, <span className="text-brand">상담</span>하세요.
-        </h2>
+        <h2 className="text-3xl md:text-5xl font-bold">메시지</h2>
         {/* 상담 폼/링크… */}
       </section>
     </main>

@@ -9,7 +9,7 @@ export default function HeroTopBadge() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.8, ease: "easeOut", delay: 0.2 }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
         className="text-xl text-2xl text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
       >
         “쉽게 길들여지지 않는 고양이들처럼”
@@ -19,7 +19,7 @@ export default function HeroTopBadge() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.8, ease: "easeOut", delay: 0.6 }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
         className="mt-0 inline-flex items-center justify-center px-5 md:px-6 py-2 md:py-2.5 pointer-events-auto"
       >
         <Image
@@ -34,7 +34,7 @@ export default function HeroTopBadge() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.8, ease: "easeOut", delay: 1 }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
         className="text-xl text-2xl text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
       >
         since 1989
@@ -43,7 +43,7 @@ export default function HeroTopBadge() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.8, ease: "easeOut", delay: 1.4 }}
+        transition={{ duration: 1.8, ease: "easeOut" }}
         className="text-xl text-2xl text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
       >
         홍대 앞 본원

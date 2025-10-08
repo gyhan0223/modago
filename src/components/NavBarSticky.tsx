@@ -81,12 +81,9 @@ export default function NavBarSticky() {
               </a>
             </li>
             <li>
-              <Link
-                href="#consult"
-                className="px-4 py-2 rounded-full bg-brand text-white hover:bg-brand-dark transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-              >
+              <a href="#consult" className="hover:text-brand">
                 상담문의
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
