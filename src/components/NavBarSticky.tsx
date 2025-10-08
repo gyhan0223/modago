@@ -23,7 +23,7 @@ export default function NavBarSticky() {
   }, []);
 
   return (
-    <div className="-mt-10 md:-mt-12 relative z-40">
+    <div className="relative z-40">
       {/* sentinel: 이 선이 화면 상단 밖으로 나가면 pinned=true */}
       <div ref={sentinelRef} aria-hidden className="h-0" />
 

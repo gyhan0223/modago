@@ -2,25 +2,31 @@
 import { motion } from "framer-motion";
 import NavBarSticky from "@/components/NavBarSticky";
 import HeroTopBadge from "@/components/HeroTopBadge";
+import HeroScrollArrow from "@/components/HeroScrollArrow";
 
 export default function Home() {
   return (
     <main className="bg-white text-gray-900">
-      {/* Hero: 배경 이미지 + 상단 배지만 */}
-      <section
-        className="relative min-h-[100vh] flex items-center justify-center text-center px-6 bg-cover bg-center"
-        style={{ backgroundImage: "url('/hero.png')" }}
-      >
-        <HeroTopBadge />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        {/* ⛔️ 여기 있던 중앙 텍스트 블록은 삭제 */}
-      </section>
+      {/* Hero Section */}
+      <div className="relative">
+        <section
+          className="relative min-h-[100vh] flex flex-col items-center justify-center text-center px-6 bg-cover bg-center"
+          style={{ backgroundImage: "url('/hero.png')" }}
+        >
+          <HeroTopBadge />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <HeroScrollArrow /> {/* 👇 화살표 추가 (아래에서 정의) */}
+        </section>
+      </div>
 
       {/* 히어로 바로 아래 겹치는 Sticky 네비 */}
       <NavBarSticky />
 
       {/* ▶️ 네비게이션 아래로 내려온 중앙 문구 */}
-      <section className="pt-10 md:pt-14 pb-10 text-center px-6">
+      <section
+        id="after-hero"
+        className="pt-10 md:pt-14 pb-10 text-center px-6"
+      >
         <div className="max-w-5xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
