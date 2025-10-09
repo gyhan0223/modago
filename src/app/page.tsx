@@ -21,19 +21,19 @@ type StudioSlide = {
 
 const STUDIO_SLIDES: StudioSlide[] = [
   {
-    src: "/studio.jpg",
+    src: "/studio/01.jpg",
     alt: "모두다른고양이 스튜디오",
     caption:
       "매일 업데이트되는 작업실 쇼케이스와 레퍼런스 라이브러리로 영감을 쌓아갑니다.",
   },
   {
-    src: "/gallery/01.jpg",
+    src: "/studio/02.jpg",
     alt: "드로잉 피드백 세션",
     caption:
       "전임 강사진이 진행하는 드로잉 피드백 세션에서 실시간 코칭으로 표현력을 다듬습니다.",
   },
   {
-    src: "/gallery/02.jpg",
+    src: "/studio/03.jpg",
     alt: "학생 포트폴리오 전시",
     caption:
       "완성된 포트폴리오 작업을 스튜디오 전시 공간에 직접 걸어보며 발표 감각을 키웁니다.",

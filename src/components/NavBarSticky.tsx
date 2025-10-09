@@ -72,7 +72,7 @@ export default function NavBarSticky() {
             </li>
             <li>
               <a href="#gallery" className="hover:text-brand">
-                작품
+                갤러리
               </a>
             </li>
             <li>
