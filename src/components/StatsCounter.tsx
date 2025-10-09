@@ -85,6 +85,20 @@ export default function StatsCounter() {
     []
   );
 
+  const [visibleCounts, setVisibleCounts] = useState<number[]>(() =>
+    sections.map((section) => Math.min(2, section.stats.length))
+  );
+
+  const showMore = (sectionIndex: number) => {
+    setVisibleCounts((prev) =>
+      prev.map((count, index) =>
+        index === sectionIndex
+          ? Math.min(count + 2, sections[sectionIndex].stats.length)
+          : count
+      )
+    );
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -152,7 +166,7 @@ export default function StatsCounter() {
                   </motion.article>
                 ) : null}
 
-                {section.stats.map((stat, index) => (
+                {section.stats.slice(0, visibleCounts[sectionIndex]).map((stat, index) => (
                   <motion.article
                     key={stat.label}
                     initial={{ opacity: 0, y: 24 }}
@@ -189,6 +203,17 @@ export default function StatsCounter() {
                   </motion.article>
                 ))}
               </div>
+              {visibleCounts[sectionIndex] < section.stats.length ? (
+                <div className="mt-6 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => showMore(sectionIndex)}
+                    className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm font-medium text-slate-100"
+                  >
+                    더보기
+                  </button>
+                </div>
+              ) : null}
             </div>
           ))}
         </div>
