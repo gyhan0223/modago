@@ -104,6 +104,8 @@ export default function Home() {
         </div>
       </section>
 
+      <StatsCounter />
+
       {/* Signature Highlights */}
       <section className="bg-gray-50 py-24">
         <div className="max-w-6xl mx-auto px-6 grid gap-6 md:grid-cols-3">
@@ -137,8 +139,6 @@ export default function Home() {
           )}
         </div>
       </section>
-
-      <StatsCounter />
 
       {/* Studio Story */}
       <section className="bg-white py-28">
