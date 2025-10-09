@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import NavBarSticky from "@/components/NavBarSticky";
 import HeroTopBadge from "@/components/HeroTopBadge";
@@ -12,7 +13,62 @@ const fadeUp = {
   animate: { opacity: 1, y: 0 },
 };
 
+type StudioSlide = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
+const STUDIO_SLIDES: StudioSlide[] = [
+  {
+    src: "/studio.jpg",
+    alt: "모두다른고양이 스튜디오",
+    caption:
+      "매일 업데이트되는 작업실 쇼케이스와 레퍼런스 라이브러리로 영감을 쌓아갑니다.",
+  },
+  {
+    src: "/gallery/01.jpg",
+    alt: "드로잉 피드백 세션",
+    caption:
+      "전임 강사진이 진행하는 드로잉 피드백 세션에서 실시간 코칭으로 표현력을 다듬습니다.",
+  },
+  {
+    src: "/gallery/02.jpg",
+    alt: "학생 포트폴리오 전시",
+    caption:
+      "완성된 포트폴리오 작업을 스튜디오 전시 공간에 직접 걸어보며 발표 감각을 키웁니다.",
+  },
+];
+
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = window.setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % STUDIO_SLIDES.length);
+    }, 5000);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [isPaused]);
+
+  const goToSlide = (index: number) => {
+    const total = STUDIO_SLIDES.length;
+    setCurrentSlide((index + total) % total);
+  };
+
+  const handlePrev = () => {
+    goToSlide(currentSlide - 1);
+  };
+
+  const handleNext = () => {
+    goToSlide(currentSlide + 1);
+  };
+
   return (
     <main className="bg-white text-gray-900">
       {/* Hero Section */}
@@ -205,15 +261,72 @@ export default function Home() {
             className="relative"
           >
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand/30 to-transparent blur-2xl" />
-            <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-gray-50 shadow-xl">
-              <img
-                src="/studio.jpg"
-                alt="모두다른고양이 스튜디오"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-8 text-sm text-white">
-                매일 업데이트되는 작업실 쇼케이스와 레퍼런스 라이브러리로 영감을
-                쌓아갑니다.
+            <div
+              className="relative overflow-hidden rounded-3xl border border-gray-200 bg-gray-50 shadow-xl"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+            >
+              <div className="relative aspect-[4/3] w-full">
+                {STUDIO_SLIDES.map((slide, index) => (
+                  <img
+                    key={slide.src}
+                    src={slide.src}
+                    alt={slide.alt}
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
+                    }`}
+                    aria-hidden={index !== currentSlide}
+                  />
+                ))}
+
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-1/2 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+
+                <div className="absolute bottom-0 left-0 right-0 z-20 p-8 text-sm text-white">
+                  {STUDIO_SLIDES[currentSlide]?.caption}
+                </div>
+
+                <div className="absolute inset-y-0 left-0 z-30 flex items-center">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    onFocus={() => setIsPaused(true)}
+                    onBlur={() => setIsPaused(false)}
+                    className="ml-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur transition hover:bg-black/60"
+                    aria-label="이전 이미지 보기"
+                  >
+                    <span aria-hidden="true">‹</span>
+                  </button>
+                </div>
+                <div className="absolute inset-y-0 right-0 z-30 flex items-center">
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    onFocus={() => setIsPaused(true)}
+                    onBlur={() => setIsPaused(false)}
+                    className="mr-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur transition hover:bg-black/60"
+                    aria-label="다음 이미지 보기"
+                  >
+                    <span aria-hidden="true">›</span>
+                  </button>
+                </div>
+
+                <div className="absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 gap-2">
+                  {STUDIO_SLIDES.map((slide, index) => (
+                    <button
+                      key={slide.src}
+                      type="button"
+                      onClick={() => goToSlide(index)}
+                      onFocus={() => setIsPaused(true)}
+                      onBlur={() => setIsPaused(false)}
+                      className={`h-2.5 w-2.5 rounded-full transition ${
+                        index === currentSlide
+                          ? "bg-white"
+                          : "bg-white/40 hover:bg-white/70"
+                      }`}
+                      aria-label={`${index + 1}번째 이미지 보기`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
