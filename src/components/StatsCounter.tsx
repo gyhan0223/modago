@@ -207,18 +207,6 @@ export default function StatsCounter() {
                   <p className="mt-2 text-sm text-slate-300">
                     {section.description}
                   </p>
-                  {section.duplicateShowMore &&
-                  visibleCounts[sectionIndex] < section.stats.length ? (
-                    <div className="mt-4">
-                      <button
-                        type="button"
-                        onClick={() => showMore(sectionIndex)}
-                        className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm font-medium text-slate-100"
-                      >
-                        더보기
-                      </button>
-                    </div>
-                  ) : null}
                 </div>
               </div>
 
