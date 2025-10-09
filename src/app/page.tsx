@@ -108,7 +108,19 @@ export default function Home() {
 
       {/* Signature Highlights */}
       <section className="bg-gray-50 py-24">
-        <div className="max-w-6xl mx-auto px-6 grid gap-6 md:grid-cols-3">
+        <div className="text-center max-w-2xl mx-auto px-6">
+          <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+            modago difference
+          </p>
+          <h2 className="mt-4 text-3xl md:text-4xl font-semibold text-slate-900">
+            모다고가 다른 학원과 다른 이유
+          </h2>
+          <p className="mt-4 text-base text-slate-500">
+            수많은 합격 사례를 넘어, 학습 경험 자체를 바꾸는 시스템으로 학생의
+            가능성을 입증합니다.
+          </p>
+        </div>
+        <div className="max-w-6xl mx-auto mt-16 px-6 grid gap-6 md:grid-cols-3">
           {["개인 맞춤 지도", "실전 기반 피드백", "입시/유학 연계"].map(
             (title, idx) => (
               <motion.article
