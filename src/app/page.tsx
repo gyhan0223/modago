@@ -121,7 +121,7 @@ export default function Home() {
           </p>
         </div>
         <div className="max-w-6xl mx-auto mt-16 px-6 grid gap-6 md:grid-cols-3">
-          {["개인 맞춤 지도", "실전 기반 피드백", "입시/유학 연계"].map(
+          {["개인 맞춤 지도", "실전 기반 피드백", "실기 + 학과 연계"].map(
             (title, idx) => (
               <motion.article
                 key={title}
@@ -143,7 +143,7 @@ export default function Home() {
                     {idx === 1 &&
                       "매 수업마다 실전 평가와 리뷰를 병행해 작업 흐름을 다듬고 포트폴리오 완성도를 끌어올립니다."}
                     {idx === 2 &&
-                      "국내외 미대 입시 경험을 바탕으로 해외 포트폴리오, 전시 준비까지 한 번에 지원합니다."}
+                      "국내에서 유일하게 수만휘와 연계하여 실기뿐만 아니라 성적 또한 책임집니다."}
                   </p>
                 </div>
               </motion.article>
