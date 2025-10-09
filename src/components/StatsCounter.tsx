@@ -15,6 +15,7 @@ type StatSection = {
   description: string;
   stats: Stat[];
   highlightStat?: Stat;
+  duplicateShowMore?: boolean;
 };
 
 function Counter({ to, run }: { to: number; run: boolean }) {
@@ -100,6 +101,7 @@ export default function StatsCounter() {
       {
         title: "2025학년도 주요 합격",
         description: "올해 확인된 대표 합격자를 대학별로 추린 숫자입니다.",
+        duplicateShowMore: true,
         stats: [
           { label: "건국대학교", value: 43, suffix: "명" },
           { label: "홍익대학교", value: 25, suffix: "명" },
@@ -205,6 +207,18 @@ export default function StatsCounter() {
                   <p className="mt-2 text-sm text-slate-300">
                     {section.description}
                   </p>
+                  {section.duplicateShowMore &&
+                  visibleCounts[sectionIndex] < section.stats.length ? (
+                    <div className="mt-4">
+                      <button
+                        type="button"
+                        onClick={() => showMore(sectionIndex)}
+                        className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm font-medium text-slate-100"
+                      >
+                        더보기
+                      </button>
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
