@@ -54,6 +54,47 @@ export default function StatsCounter() {
           { label: "국민대학교", value: 416, suffix: "명" },
           { label: "한국예술종합학교", value: 403, suffix: "명" },
           { label: "건국대학교", value: 386, suffix: "명" },
+          { label: "건국대학교", value: 386, suffix: "명" },
+          { label: "상명대학교", value: 293, suffix: "명" },
+          { label: "동덕여자대학교", value: 257, suffix: "명" },
+          { label: "서울과학기술대학교", value: 253, suffix: "명" },
+          { label: "서울대학교", value: 247, suffix: "명" },
+          { label: "성신여자대학교", value: 204, suffix: "명" },
+          { label: "경희대학교", value: 203, suffix: "명" },
+          { label: "서울여자대학교", value: 146, suffix: "명" },
+          { label: "가천대학교", value: 146, suffix: "명" },
+          { label: "중앙대학교", value: 136, suffix: "명" },
+          { label: "숙명여자대학교", value: 129, suffix: "명" },
+          { label: "단국대학교", value: 126, suffix: "명" },
+          { label: "계원예술대학교", value: 117, suffix: "명" },
+          { label: "한양대학교", value: 113, suffix: "명" },
+          { label: "경기대학교", value: 110, suffix: "명" },
+          { label: "호서대학교", value: 104, suffix: "명" },
+          { label: "SADI", value: 92, suffix: "명" },
+          { label: "덕성여자대학교", value: 92, suffix: "명" },
+          { label: "한성대학교", value: 92, suffix: "명" },
+          { label: "협성대학교", value: 91, suffix: "명" },
+          { label: "명지대학교", value: 84, suffix: "명" },
+          { label: "세종대학교", value: 79, suffix: "명" },
+          { label: "고려대학교", value: 79, suffix: "명" },
+          { label: "수원대학교", value: 73, suffix: "명" },
+          { label: "서울시립대학교", value: 73, suffix: "명" },
+          { label: "성균관대학교", value: 71, suffix: "명" },
+          { label: "백석대학교", value: 64, suffix: "명" },
+          { label: "추계예술대학교", value: 45, suffix: "명" },
+          { label: "서경대학교", value: 46, suffix: "명" },
+          { label: "용인대학교", value: 36, suffix: "명" },
+          { label: "남서울대학교", value: 44, suffix: "명" },
+          { label: "강남대학교", value: 42, suffix: "명" },
+          { label: "강원대학교", value: 41, suffix: "명" },
+          { label: "연세대학교", value: 41, suffix: "명" },
+          { label: "인하대학교", value: 39, suffix: "명" },
+          { label: "한세대학교", value: 33, suffix: "명" },
+          { label: "세명대학교", value: 32, suffix: "명" },
+          { label: "대진대학교", value: 32, suffix: "명" },
+          { label: "인천대학교", value: 22, suffix: "명" },
+          { label: "평택대학교", value: 14, suffix: "명" },
+          { label: "인천카톨릭대학교", value: 14, suffix: "명" },
         ] satisfies Stat[],
       },
       {
@@ -64,8 +105,44 @@ export default function StatsCounter() {
           { label: "홍익대학교", value: 25, suffix: "명" },
           { label: "국민대학교", value: 25, suffix: "명" },
           { label: "서울과학기술대학교", value: 24, suffix: "명" },
-          { label: "이화여자대학교", value: 13, suffix: "명" },
           { label: "호서대학교", value: 13, suffix: "명" },
+          { label: "이화여자대학교", value: 13, suffix: "명" },
+          { label: "고려대학교", value: 11, suffix: "명" },
+          { label: "중앙대학교", value: 12, suffix: "명" },
+          { label: "동덕여자대학교", value: 9, suffix: "명" },
+          { label: "숙명여자대학교", value: 9, suffix: "명" },
+          { label: "한성대학교", value: 9, suffix: "명" },
+          { label: "성균관대학교", value: 9, suffix: "명" },
+          { label: "성신여자대학교", value: 8, suffix: "명" },
+          { label: "가천대학교", value: 8, suffix: "명" },
+          { label: "한양대학교", value: 8, suffix: "명" },
+          { label: "상명대학교", value: 7, suffix: "명" },
+          { label: "서울대학교", value: 7, suffix: "명" },
+          { label: "단국대학교", value: 7, suffix: "명" },
+          { label: "연세대학교", value: 7, suffix: "명" },
+          { label: "경희대학교", value: 6, suffix: "명" },
+          { label: "서울여자대학교", value: 6, suffix: "명" },
+          { label: "덕성여자대학교", value: 6, suffix: "명" },
+          { label: "협성대학교", value: 6, suffix: "명" },
+          { label: "서울시립대학교", value: 6, suffix: "명" },
+          { label: "경기대학교", value: 4, suffix: "명" },
+          { label: "SADI", value: 4, suffix: "명" },
+          { label: "명지대학교", value: 4, suffix: "명" },
+          { label: "수원대학교", value: 4, suffix: "명" },
+          { label: "백석대학교", value: 4, suffix: "명" },
+          { label: "서경대학교", value: 4, suffix: "명" },
+          { label: "강남대학교", value: 4, suffix: "명" },
+          { label: "인하대학교", value: 4, suffix: "명" },
+          { label: "계원예술대학교", value: 5, suffix: "명" },
+          { label: "한국예술종합학교", value: 3, suffix: "명" },
+          { label: "세종대학교", value: 3, suffix: "명" },
+          { label: "용인대학교", value: 3, suffix: "명" },
+          { label: "남서울대학교", value: 3, suffix: "명" },
+          { label: "한세대학교", value: 3, suffix: "명" },
+          { label: "강원대학교", value: 2, suffix: "명" },
+          { label: "세명대학교", value: 2, suffix: "명" },
+          { label: "대진대학교", value: 2, suffix: "명" },
+          { label: "인천대학교", value: 1, suffix: "명" },
         ] satisfies Stat[],
       },
       {
@@ -86,14 +163,14 @@ export default function StatsCounter() {
   );
 
   const [visibleCounts, setVisibleCounts] = useState<number[]>(() =>
-    sections.map((section) => Math.min(2, section.stats.length))
+    sections.map((section) => Math.min(6, section.stats.length))
   );
 
   const showMore = (sectionIndex: number) => {
     setVisibleCounts((prev) =>
       prev.map((count, index) =>
         index === sectionIndex
-          ? Math.min(count + 2, sections[sectionIndex].stats.length)
+          ? Math.min(count + 6, sections[sectionIndex].stats.length)
           : count
       )
     );
@@ -166,42 +243,44 @@ export default function StatsCounter() {
                   </motion.article>
                 ) : null}
 
-                {section.stats.slice(0, visibleCounts[sectionIndex]).map((stat, index) => (
-                  <motion.article
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={
-                      inView
-                        ? {
-                            opacity: 1,
-                            y: 0,
-                            transition: {
-                              delay:
-                                sectionIndex * 0.2 +
-                                (section.highlightStat ? index + 1 : index) *
-                                  0.05,
-                              duration: 0.6,
-                              ease: "easeOut",
-                            },
-                          }
-                        : { opacity: 0, y: 24 }
-                    }
-                    className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_15px_35px_-15px_rgba(15,23,42,0.6)]"
-                  >
-                    <div className="text-3xl font-bold">
-                      <Counter to={stat.value} run={inView} />
-                      {stat.suffix}
-                    </div>
-                    <div className="mt-1 text-sm font-medium text-slate-100">
-                      {stat.label}
-                    </div>
-                    {stat.helper ? (
-                      <p className="mt-2 text-xs text-slate-400">
-                        {stat.helper}
-                      </p>
-                    ) : null}
-                  </motion.article>
-                ))}
+                {section.stats
+                  .slice(0, visibleCounts[sectionIndex])
+                  .map((stat, index) => (
+                    <motion.article
+                      key={stat.label}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={
+                        inView
+                          ? {
+                              opacity: 1,
+                              y: 0,
+                              transition: {
+                                delay:
+                                  sectionIndex * 0.2 +
+                                  (section.highlightStat ? index + 1 : index) *
+                                    0.05,
+                                duration: 0.6,
+                                ease: "easeOut",
+                              },
+                            }
+                          : { opacity: 0, y: 24 }
+                      }
+                      className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_15px_35px_-15px_rgba(15,23,42,0.6)]"
+                    >
+                      <div className="text-3xl font-bold">
+                        <Counter to={stat.value} run={inView} />
+                        {stat.suffix}
+                      </div>
+                      <div className="mt-1 text-sm font-medium text-slate-100">
+                        {stat.label}
+                      </div>
+                      {stat.helper ? (
+                        <p className="mt-2 text-xs text-slate-400">
+                          {stat.helper}
+                        </p>
+                      ) : null}
+                    </motion.article>
+                  ))}
               </div>
               {visibleCounts[sectionIndex] < section.stats.length ? (
                 <div className="mt-6 flex justify-center">
