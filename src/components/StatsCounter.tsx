@@ -10,6 +10,13 @@ type Stat = {
   helper?: string;
 };
 
+type StatSection = {
+  title: string;
+  description: string;
+  stats: Stat[];
+  highlightStat?: Stat;
+};
+
 function Counter({ to, run }: { to: number; run: boolean }) {
   const mv = useMotionValue(0);
   const [val, setVal] = useState(0);
@@ -29,19 +36,19 @@ export default function StatsCounter() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, amount: 0.2 });
 
-  const sections = useMemo(
+  const sections = useMemo<StatSection[]>(
     () => [
       {
         title: "since1989 누적 성과",
         description:
           "35년 역사 속에서 축적된 합격 실적을 핵심 수치로 요약했습니다.",
+        highlightStat: {
+          label: "최종 합격자",
+          value: 6405,
+          suffix: "명",
+          helper: "전 대학 및 전공 누적",
+        },
         stats: [
-          {
-            label: "최종 합격자",
-            value: 6405,
-            suffix: "명",
-            helper: "전 대학 및 전공 누적",
-          },
           { label: "홍익대학교", value: 764, suffix: "명" },
           { label: "이화여자대학교", value: 521, suffix: "명" },
           { label: "국민대학교", value: 416, suffix: "명" },
@@ -112,6 +119,40 @@ export default function StatsCounter() {
               </div>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {section.highlightStat ? (
+                  <motion.article
+                    key={section.highlightStat.label}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={
+                      inView
+                        ? {
+                            opacity: 1,
+                            y: 0,
+                            transition: {
+                              delay: sectionIndex * 0.2,
+                              duration: 0.6,
+                              ease: "easeOut",
+                            },
+                          }
+                        : { opacity: 0, y: 24 }
+                    }
+                    className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-white/20 bg-white/10 p-8 shadow-[0_25px_45px_-20px_rgba(15,23,42,0.8)]"
+                  >
+                    <div className="text-4xl md:text-5xl font-bold">
+                      <Counter to={section.highlightStat.value} run={inView} />
+                      {section.highlightStat.suffix}
+                    </div>
+                    <div className="mt-2 text-base font-semibold text-slate-100">
+                      {section.highlightStat.label}
+                    </div>
+                    {section.highlightStat.helper ? (
+                      <p className="mt-3 text-sm text-slate-300">
+                        {section.highlightStat.helper}
+                      </p>
+                    ) : null}
+                  </motion.article>
+                ) : null}
+
                 {section.stats.map((stat, index) => (
                   <motion.article
                     key={stat.label}
@@ -122,7 +163,9 @@ export default function StatsCounter() {
                             opacity: 1,
                             y: 0,
                             transition: {
-                              delay: sectionIndex * 0.2 + index * 0.05,
+                              delay:
+                                sectionIndex * 0.2 +
+                                (section.highlightStat ? index + 1 : index) * 0.05,
                               duration: 0.6,
                               ease: "easeOut",
                             },
