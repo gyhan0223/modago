@@ -102,6 +102,12 @@ export default function StatsCounter() {
         title: "2025학년도 주요 합격",
         description: "올해 확인된 대표 합격자를 대학별로 추린 숫자입니다.",
         duplicateShowMore: true,
+        highlightStat: {
+          label: "2025학년도 총 합격자",
+          value: 343,
+          suffix: "명",
+          helper: "주요 합격 집계",
+        },
         stats: [
           { label: "건국대학교", value: 43, suffix: "명" },
           { label: "홍익대학교", value: 25, suffix: "명" },
