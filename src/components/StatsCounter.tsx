@@ -40,9 +40,9 @@ export default function StatsCounter() {
   const sections = useMemo<StatSection[]>(
     () => [
       {
-        title: "since1989 누적 성과",
+        title: "since 1989 누적 성과",
         description:
-          "35년 역사 속에서 축적된 합격 실적을 핵심 수치로 요약했습니다.",
+          "37년 역사 속에서 축적된 합격 실적을 핵심 수치로 요약했습니다.",
         highlightStat: {
           label: "최종 합격자",
           value: 6405,
@@ -153,19 +153,6 @@ export default function StatsCounter() {
           { label: "인천대학교", value: 1, suffix: "명" },
         ] satisfies Stat[],
       },
-      {
-        title: "주요 사립대 합격 네트워크",
-        description:
-          "디자인·예술 계열 상위권 대학에서 쌓아 온 신뢰를 보여줍니다.",
-        stats: [
-          { label: "서울대학교", value: 247, suffix: "명" },
-          { label: "연세대학교", value: 41, suffix: "명" },
-          { label: "고려대학교", value: 79, suffix: "명" },
-          { label: "성균관대학교", value: 71, suffix: "명" },
-          { label: "한양대학교", value: 113, suffix: "명" },
-          { label: "중앙대학교", value: 136, suffix: "명" },
-        ] satisfies Stat[],
-      },
     ],
     []
   );
@@ -187,13 +174,14 @@ export default function StatsCounter() {
   return (
     <section
       ref={sectionRef}
+      id="stats"
       className="relative py-24 bg-slate-950 text-white overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-950 to-slate-900/80" />
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
-            since1989 Performance
+            since 1989 Performance
           </p>
           <h2 className="mt-4 text-3xl md:text-4xl font-semibold">
             숫자로 증명하는 모다고 합격 파워

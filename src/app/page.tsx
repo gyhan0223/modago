@@ -88,7 +88,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-5xl font-semibold leading-tight text-gray-900"
           >
-            당신의 작품 세계를 발견하고 확장하는 홍대 대표 입시미술 전문 공간
+            합격, 그 이상의 가치를 만드는 미술 교육
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -97,9 +97,9 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-lg md:text-xl text-gray-600"
           >
-            주입식 수업 대신 작가로서의 시선과 손끝을 단련시키는 커리큘럼으로
-            미대 입시부터 유학 포트폴리오까지, 목표에 맞춘 맞춤 지도를
-            진행합니다.
+            주입식 수업 대신 시선과 손끝을 단련시키는 커리큘럼으로 <br />
+            미대 입시뿐만 아니라 졸업 후에도 <br />
+            목표에 맞춘 맞춤 지도를 진행합니다.
           </motion.p>
         </div>
       </section>

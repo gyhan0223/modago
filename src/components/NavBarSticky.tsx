@@ -66,6 +66,11 @@ export default function NavBarSticky() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <ul className="h-12 md:h-14 flex items-center justify-center gap-6 md:gap-10 text-sm md:text-base">
             <li>
+              <a href="#stats" className="hover:text-brand">
+                합격자
+              </a>
+            </li>
+            <li>
               <a href="#gallery" className="hover:text-brand">
                 작품
               </a>
