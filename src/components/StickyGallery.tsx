@@ -18,6 +18,48 @@ const galleryImagesByTab: Record<string, string[]> = {
     "/figure/04.jpg",
     "/figure/05.jpg",
     "/figure/06.jpg",
+    "/figure/07.jpg",
+    "/figure/08.jpg",
+    "/figure/09.jpg",
+    "/figure/10.jpg",
+    "/figure/11.jpg",
+    "/figure/12.jpg",
+    "/figure/13.jpg",
+    "/figure/14.jpg",
+    "/figure/15.jpg",
+    "/figure/16.jpg",
+    "/figure/17.jpg",
+    "/figure/18.jpg",
+    "/figure/19.jpg",
+    "/figure/20.jpg",
+    "/figure/21.jpg",
+    "/figure/22.jpg",
+    "/figure/23.jpg",
+    "/figure/24.jpg",
+    "/figure/25.jpg",
+    "/figure/26.jpg",
+    "/figure/27.jpg",
+    "/figure/28.jpg",
+    "/figure/29.jpg",
+    "/figure/30.jpg",
+    "/figure/31.jpg",
+    "/figure/32.jpg",
+    "/figure/33.jpg",
+    "/figure/34.jpg",
+    "/figure/35.jpg",
+    "/figure/36.jpg",
+    "/figure/37.jpg",
+    "/figure/38.jpg",
+    "/figure/39.jpg",
+    "/figure/40.jpg",
+    "/figure/41.jpg",
+    "/figure/42.jpg",
+    "/figure/43.jpg",
+    "/figure/44.jpg",
+    "/figure/45.jpg",
+    "/figure/46.jpg",
+    "/figure/47.jpg",
+    "/figure/48.jpg",
   ],
   drawing: [
     "/drawing/01.jpg",
@@ -110,7 +152,7 @@ const gallerySections = galleryTabs.map((tab, tabIndex) => {
         src,
         alt: `${tab.label} 작품 ${imageIndex + 1}`,
         delay: imageIndex * 0.07 + tabIndex * 0.02,
-      }),
+      })
     ),
   };
 });
@@ -190,12 +232,9 @@ export default function StickyGallery() {
     };
   }, [closeLightbox, isLightboxOpen, showNext, showPrevious]);
 
-  const handleTouchStart = useCallback(
-    (event: TouchEvent<HTMLDivElement>) => {
-      touchStartX.current = event.touches[0]?.clientX ?? null;
-    },
-    [],
-  );
+  const handleTouchStart = useCallback((event: TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  }, []);
 
   const handleTouchEnd = useCallback(() => {
     touchStartX.current = null;
@@ -220,7 +259,7 @@ export default function StickyGallery() {
         touchStartX.current = currentX;
       }
     },
-    [isLightboxOpen, showNext, showPrevious],
+    [isLightboxOpen, showNext, showPrevious]
   );
 
   const currentImage = useMemo(() => {
@@ -295,7 +334,9 @@ export default function StickyGallery() {
                       alt={image.alt}
                       className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
                     />
-                    <span className="sr-only">{`${section.label} 작품 ${index + 1} 확대 보기`}</span>
+                    <span className="sr-only">{`${section.label} 작품 ${
+                      index + 1
+                    } 확대 보기`}</span>
                   </motion.button>
                 ))}
               </div>
@@ -333,7 +374,11 @@ export default function StickyGallery() {
                 strokeWidth={1.5}
                 className="h-5 w-5"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M6 18L18 6" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 6l12 12M6 18L18 6"
+                />
               </svg>
             </button>
 
@@ -341,7 +386,10 @@ export default function StickyGallery() {
               {lightboxState.currentIndex + 1} / {totalImages}
             </div>
 
-            <div className="flex h-full w-full max-w-5xl items-center justify-center" aria-live="polite">
+            <div
+              className="flex h-full w-full max-w-5xl items-center justify-center"
+              aria-live="polite"
+            >
               <button
                 type="button"
                 className="hidden h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white md:flex"
@@ -359,7 +407,11 @@ export default function StickyGallery() {
                   strokeWidth={1.5}
                   className="h-6 w-6"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 19.5L8.25 12l7.5-7.5"
+                  />
                 </svg>
               </button>
 
@@ -398,7 +450,11 @@ export default function StickyGallery() {
                   strokeWidth={1.5}
                   className="h-6 w-6"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5L15.75 12l-7.5 7.5" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8.25 4.5L15.75 12l-7.5 7.5"
+                  />
                 </svg>
               </button>
             </div>
@@ -421,7 +477,11 @@ export default function StickyGallery() {
                   strokeWidth={1.5}
                   className="h-5 w-5"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 19.5L8.25 12l7.5-7.5"
+                  />
                 </svg>
               </button>
               <button
@@ -441,7 +501,11 @@ export default function StickyGallery() {
                   strokeWidth={1.5}
                   className="h-5 w-5"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5L15.75 12l-7.5 7.5" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8.25 4.5L15.75 12l-7.5 7.5"
+                  />
                 </svg>
               </button>
             </div>
