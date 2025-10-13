@@ -2,7 +2,82 @@
 import { motion } from "framer-motion";
 import { galleryTabs, getGallerySectionId } from "@/data/galleryTabs";
 
-const baseImages = [
+const galleryImagesByTab: Record<string, string[]> = {
+  figure: [
+    "/figure/01.jpg",
+    "/figure/02.jpg",
+    "/figure/03.jpg",
+    "/figure/04.jpg",
+    "/figure/05.jpg",
+    "/figure/06.jpg",
+  ],
+  drawing: [
+    "/dessin/01.jpg",
+    "/dessin/02.jpg",
+    "/dessin/03.jpg",
+    "/dessin/04.jpg",
+    "/dessin/05.jpg",
+    "/dessin/06.jpg",
+  ],
+  idea: [
+    "/iead-and-expression/01.jpg",
+    "/iead-and-expression/02.jpg",
+    "/iead-and-expression/03.jpg",
+    "/iead-and-expression/04.jpg",
+    "/iead-and-expression/05.jpg",
+    "/iead-and-expression/06.jpg",
+  ],
+  "stage-design": [
+    "/set-design/01.jpg",
+    "/set-design/02.jpg",
+    "/set-design/03.jpg",
+    "/set-design/04.jpg",
+    "/set-design/05.jpg",
+    "/set-design/06.jpg",
+  ],
+  "basic-liberal": [
+    "/basic-knowledge-of-art/01.jpg",
+    "/basic-knowledge-of-art/02.jpg",
+    "/basic-knowledge-of-art/03.jpg",
+    "/basic-knowledge-of-art/04.jpg",
+    "/basic-knowledge-of-art/05.jpg",
+    "/basic-knowledge-of-art/06.jpg",
+  ],
+  "basic-design": [
+    "/gallery/01.jpg",
+    "/gallery/02.jpg",
+    "/gallery/03.jpg",
+    "/gallery/04.jpg",
+    "/gallery/05.jpg",
+    "/gallery/06.jpg",
+  ],
+  "portfolio-1": [
+    "/gallery/07.jpg",
+    "/gallery/08.jpg",
+    "/gallery/09.jpg",
+    "/gallery/10.jpg",
+    "/gallery/11.jpg",
+    "/gallery/12.jpg",
+  ],
+  "portfolio-2": [
+    "/gallery/13.jpg",
+    "/gallery/14.jpg",
+    "/gallery/15.jpg",
+    "/gallery/16.jpg",
+    "/gallery/17.jpg",
+    "/gallery/18.jpg",
+  ],
+  "portfolio-3": [
+    "/gallery/19.jpg",
+    "/gallery/20.jpg",
+    "/gallery/21.jpg",
+    "/gallery/22.jpg",
+    "/gallery/23.jpg",
+    "/gallery/24.png",
+  ],
+};
+
+const defaultImages = [
   "/gallery/01.jpg",
   "/gallery/02.jpg",
   "/gallery/03.jpg",
@@ -11,14 +86,18 @@ const baseImages = [
   "/gallery/06.jpg",
 ];
 
-const gallerySections = galleryTabs.map((tab, tabIndex) => ({
-  ...tab,
-  images: baseImages.map((src, imageIndex) => ({
-    src,
-    alt: `${tab.label} 작품 ${imageIndex + 1}`,
-    delay: imageIndex * 0.07 + tabIndex * 0.02,
-  })),
-}));
+const gallerySections = galleryTabs.map((tab, tabIndex) => {
+  const imageSources = galleryImagesByTab[tab.id] ?? defaultImages;
+
+  return {
+    ...tab,
+    images: imageSources.map((src, imageIndex) => ({
+      src,
+      alt: `${tab.label} 작품 ${imageIndex + 1}`,
+      delay: imageIndex * 0.07 + tabIndex * 0.02,
+    })),
+  };
+});
 
 export default function StickyGallery() {
   return (
