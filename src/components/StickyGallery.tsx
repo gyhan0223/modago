@@ -157,13 +157,15 @@ const gallerySections = galleryTabs.map((tab, tabIndex) => {
 
   return {
     ...tab,
-    images: imageSources.map(
-      (src, imageIndex): GalleryImage => ({
+    images: imageSources.map((src, imageIndex): GalleryImage => {
+      const pageOffset = Math.floor(imageIndex / PAGE_SIZE);
+
+      return {
         src,
         alt: `${tab.label} 작품 ${imageIndex + 1}`,
-        delay: imageIndex * 0.07 + tabIndex * 0.02,
-      })
-    ),
+        delay: pageOffset * 0.12 + tabIndex * 0.02,
+      };
+    }),
   };
 });
 
@@ -176,7 +178,10 @@ function GalleryCarousel({
   section: GallerySection;
   onImageClick: (images: GalleryImage[], index: number) => void;
 }) {
-  const pages = useMemo(() => chunkArray(section.images, PAGE_SIZE), [section.images]);
+  const pages = useMemo(
+    () => chunkArray(section.images, PAGE_SIZE),
+    [section.images]
+  );
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
@@ -186,7 +191,7 @@ function GalleryCarousel({
 
     const intervalId = window.setInterval(() => {
       setCurrentPage((previous) => (previous + 1) % pages.length);
-    }, 3000);
+    }, 5000);
 
     return () => {
       window.clearInterval(intervalId);
