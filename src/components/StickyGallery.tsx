@@ -142,6 +142,16 @@ type GalleryImage = {
   delay: number;
 };
 
+const PAGE_SIZE = 6;
+
+function chunkArray<T>(items: T[], size: number) {
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+  return chunks;
+}
+
 const gallerySections = galleryTabs.map((tab, tabIndex) => {
   const imageSources = galleryImagesByTab[tab.id] ?? defaultImages;
 
@@ -156,6 +166,101 @@ const gallerySections = galleryTabs.map((tab, tabIndex) => {
     ),
   };
 });
+
+type GallerySection = (typeof gallerySections)[number];
+
+function GalleryCarousel({
+  section,
+  onImageClick,
+}: {
+  section: GallerySection;
+  onImageClick: (images: GalleryImage[], index: number) => void;
+}) {
+  const pages = useMemo(() => chunkArray(section.images, PAGE_SIZE), [section.images]);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  useEffect(() => {
+    if (pages.length <= 1) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setCurrentPage((previous) => (previous + 1) % pages.length);
+    }, 3000);
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, [pages.length]);
+
+  useEffect(() => {
+    if (currentPage >= pages.length) {
+      setCurrentPage(0);
+    }
+  }, [currentPage, pages.length]);
+
+  return (
+    <div>
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-500"
+          style={{ transform: `translateX(-${currentPage * 100}%)` }}
+        >
+          {pages.map((page, pageIndex) => (
+            <div
+              key={`${section.id}-page-${pageIndex}`}
+              className="grid min-w-full grid-cols-2 gap-4 md:grid-cols-3 md:gap-6"
+            >
+              {page.map((image, imageIndex) => {
+                const globalIndex = pageIndex * PAGE_SIZE + imageIndex;
+
+                return (
+                  <motion.button
+                    key={`${section.id}-${image.src}`}
+                    type="button"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: image.delay }}
+                    viewport={{ amount: 0.2, once: true }}
+                    className="group aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                    onClick={() => onImageClick(section.images, globalIndex)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                    />
+                    <span className="sr-only">{`${section.label} 작품 ${
+                      globalIndex + 1
+                    } 확대 보기`}</span>
+                  </motion.button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {pages.length > 1 ? (
+        <div className="mt-6 flex justify-center gap-2">
+          {pages.map((_, pageIndex) => (
+            <button
+              key={`${section.id}-indicator-${pageIndex}`}
+              type="button"
+              onClick={() => setCurrentPage(pageIndex)}
+              className={`h-2.5 w-2.5 rounded-full transition ${
+                pageIndex === currentPage
+                  ? "bg-brand"
+                  : "bg-gray-300 hover:bg-gray-400"
+              }`}
+              aria-label={`${section.label} 이미지 그룹 ${pageIndex + 1} 보기`}
+            />
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 export default function StickyGallery() {
   const [lightboxState, setLightboxState] = useState<{
@@ -317,29 +422,7 @@ export default function StickyGallery() {
                   </p>
                 ) : null}
               </div>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
-                {section.images.map((image, index) => (
-                  <motion.button
-                    key={`${section.id}-${image.src}`}
-                    type="button"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: image.delay }}
-                    viewport={{ amount: 0.2, once: true }}
-                    className="group aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                    onClick={() => openLightbox(section.images, index)}
-                  >
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-                    />
-                    <span className="sr-only">{`${section.label} 작품 ${
-                      index + 1
-                    } 확대 보기`}</span>
-                  </motion.button>
-                ))}
-              </div>
+              <GalleryCarousel section={section} onImageClick={openLightbox} />
             </div>
           </section>
         ))}
