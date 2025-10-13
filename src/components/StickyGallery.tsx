@@ -1,5 +1,13 @@
 "use client";
-import { motion } from "framer-motion";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type TouchEvent,
+} from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { galleryTabs, getGallerySectionId } from "@/data/galleryTabs";
 
 const galleryImagesByTab: Record<string, string[]> = {
@@ -86,20 +94,140 @@ const defaultImages = [
   "/gallery/06.jpg",
 ];
 
+type GalleryImage = {
+  src: string;
+  alt: string;
+  delay: number;
+};
+
 const gallerySections = galleryTabs.map((tab, tabIndex) => {
   const imageSources = galleryImagesByTab[tab.id] ?? defaultImages;
 
   return {
     ...tab,
-    images: imageSources.map((src, imageIndex) => ({
-      src,
-      alt: `${tab.label} 작품 ${imageIndex + 1}`,
-      delay: imageIndex * 0.07 + tabIndex * 0.02,
-    })),
+    images: imageSources.map(
+      (src, imageIndex): GalleryImage => ({
+        src,
+        alt: `${tab.label} 작품 ${imageIndex + 1}`,
+        delay: imageIndex * 0.07 + tabIndex * 0.02,
+      }),
+    ),
   };
 });
 
 export default function StickyGallery() {
+  const [lightboxState, setLightboxState] = useState<{
+    images: GalleryImage[];
+    currentIndex: number;
+  } | null>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  const openLightbox = useCallback((images: GalleryImage[], index: number) => {
+    setLightboxState({ images, currentIndex: index });
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxState(null);
+  }, []);
+
+  const showPrevious = useCallback(() => {
+    setLightboxState((prev) => {
+      if (!prev) return prev;
+      const nextIndex =
+        (prev.currentIndex - 1 + prev.images.length) % prev.images.length;
+      return {
+        ...prev,
+        currentIndex: nextIndex,
+      };
+    });
+  }, []);
+
+  const showNext = useCallback(() => {
+    setLightboxState((prev) => {
+      if (!prev) return prev;
+      const nextIndex = (prev.currentIndex + 1) % prev.images.length;
+      return {
+        ...prev,
+        currentIndex: nextIndex,
+      };
+    });
+  }, []);
+
+  const totalImages = lightboxState?.images.length ?? 0;
+  const isLightboxOpen = lightboxState !== null;
+
+  useEffect(() => {
+    if (!isLightboxOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeLightbox();
+        return;
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        showPrevious();
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        showNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    const { body } = document;
+    const previousOverflow = body.style.overflow;
+    body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      body.style.overflow = previousOverflow;
+    };
+  }, [closeLightbox, isLightboxOpen, showNext, showPrevious]);
+
+  const handleTouchStart = useCallback(
+    (event: TouchEvent<HTMLDivElement>) => {
+      touchStartX.current = event.touches[0]?.clientX ?? null;
+    },
+    [],
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    touchStartX.current = null;
+  }, []);
+
+  const handleTouchMove = useCallback(
+    (event: TouchEvent<HTMLDivElement>) => {
+      if (!isLightboxOpen) return;
+      if (touchStartX.current === null) return;
+
+      const currentX = event.touches[0]?.clientX;
+      if (currentX === undefined) return;
+
+      const deltaX = touchStartX.current - currentX;
+      const threshold = 40;
+
+      if (deltaX > threshold) {
+        showNext();
+        touchStartX.current = currentX;
+      } else if (deltaX < -threshold) {
+        showPrevious();
+        touchStartX.current = currentX;
+      }
+    },
+    [isLightboxOpen, showNext, showPrevious],
+  );
+
+  const currentImage = useMemo(() => {
+    if (!lightboxState) return null;
+    return lightboxState.images[lightboxState.currentIndex];
+  }, [lightboxState]);
+
   return (
     <section id="gallery" className="relative">
       <div className="border-b border-black/5 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
@@ -151,27 +279,175 @@ export default function StickyGallery() {
                 ) : null}
               </div>
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
-                {section.images.map((image) => (
-                  <motion.div
+                {section.images.map((image, index) => (
+                  <motion.button
                     key={`${section.id}-${image.src}`}
+                    type="button"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: image.delay }}
                     viewport={{ amount: 0.2, once: true }}
-                    className="aspect-[4/5] overflow-hidden rounded-xl bg-gray-100"
+                    className="group aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                    onClick={() => openLightbox(section.images, index)}
                   >
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
                     />
-                  </motion.div>
+                    <span className="sr-only">{`${section.label} 작품 ${index + 1} 확대 보기`}</span>
+                  </motion.button>
                 ))}
               </div>
             </div>
           </section>
         ))}
       </div>
+
+      <AnimatePresence>
+        {lightboxState && currentImage ? (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeLightbox}
+            role="dialog"
+            aria-modal="true"
+            aria-label="학생 작품 큰 이미지"
+          >
+            <button
+              type="button"
+              className="absolute right-6 top-6 rounded-full border border-white/20 bg-black/50 p-2 text-white transition hover:bg-black/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              onClick={(event) => {
+                event.stopPropagation();
+                closeLightbox();
+              }}
+              aria-label="닫기"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                className="h-5 w-5"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M6 18L18 6" />
+              </svg>
+            </button>
+
+            <div className="absolute left-1/2 top-6 -translate-x-1/2 rounded-full bg-black/50 px-4 py-2 text-sm font-medium text-white">
+              {lightboxState.currentIndex + 1} / {totalImages}
+            </div>
+
+            <div className="flex h-full w-full max-w-5xl items-center justify-center" aria-live="polite">
+              <button
+                type="button"
+                className="hidden h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white md:flex"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  showPrevious();
+                }}
+                aria-label="이전 작품"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  className="h-6 w-6"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+
+              <div
+                className="relative mx-4 flex max-h-[80vh] w-full max-w-4xl items-center justify-center"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  showNext();
+                }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                role="presentation"
+              >
+                <img
+                  src={currentImage.src}
+                  alt={currentImage.alt}
+                  className="max-h-[80vh] w-full rounded-lg object-contain shadow-2xl"
+                />
+              </div>
+
+              <button
+                type="button"
+                className="hidden h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white md:flex"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  showNext();
+                }}
+                aria-label="다음 작품"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  className="h-6 w-6"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5L15.75 12l-7.5 7.5" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="absolute inset-x-0 bottom-6 flex justify-center gap-4 md:hidden">
+              <button
+                type="button"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  showPrevious();
+                }}
+                aria-label="이전 작품"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  className="h-5 w-5"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white transition hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  showNext();
+                }}
+                aria-label="다음 작품"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  className="h-5 w-5"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5L15.75 12l-7.5 7.5" />
+                </svg>
+              </button>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }
