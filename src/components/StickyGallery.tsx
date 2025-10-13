@@ -12,36 +12,36 @@ const galleryImagesByTab: Record<string, string[]> = {
     "/figure/06.jpg",
   ],
   drawing: [
-    "/dessin/01.jpg",
-    "/dessin/02.jpg",
-    "/dessin/03.jpg",
-    "/dessin/04.jpg",
-    "/dessin/05.jpg",
-    "/dessin/06.jpg",
+    "/drawing/01.jpg",
+    "/drawing/02.jpg",
+    "/drawing/03.jpg",
+    "/drawing/04.jpg",
+    "/drawing/05.jpg",
+    "/drawing/06.jpg",
   ],
   idea: [
-    "/iead-and-expression/01.jpg",
-    "/iead-and-expression/02.jpg",
-    "/iead-and-expression/03.jpg",
-    "/iead-and-expression/04.jpg",
-    "/iead-and-expression/05.jpg",
-    "/iead-and-expression/06.jpg",
+    "/idea/01.jpg",
+    "/idea/02.jpg",
+    "/idea/03.jpg",
+    "/idea/04.jpg",
+    "/idea/05.jpg",
+    "/idea/06.jpg",
   ],
   "stage-design": [
-    "/set-design/01.jpg",
-    "/set-design/02.jpg",
-    "/set-design/03.jpg",
-    "/set-design/04.jpg",
-    "/set-design/05.jpg",
-    "/set-design/06.jpg",
+    "/stage-design/01.jpg",
+    "/stage-design/02.jpg",
+    "/stage-design/03.jpg",
+    "/stage-design/04.jpg",
+    "/stage-design/05.jpg",
+    "/stage-design/06.jpg",
   ],
   "basic-liberal": [
-    "/basic-knowledge-of-art/01.jpg",
-    "/basic-knowledge-of-art/02.jpg",
-    "/basic-knowledge-of-art/03.jpg",
-    "/basic-knowledge-of-art/04.jpg",
-    "/basic-knowledge-of-art/05.jpg",
-    "/basic-knowledge-of-art/06.jpg",
+    "/basic-liberal/01.jpg",
+    "/basic-liberal/02.jpg",
+    "/basic-liberal/03.jpg",
+    "/basic-liberal/04.jpg",
+    "/basic-liberal/05.jpg",
+    "/basic-liberal/06.jpg",
   ],
   "basic-design": [
     "/gallery/01.jpg",
@@ -102,7 +102,7 @@ const gallerySections = galleryTabs.map((tab, tabIndex) => {
 export default function StickyGallery() {
   return (
     <section id="gallery" className="relative">
-      <div className="sticky top-0 z-30 border-b border-black/5 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+      <div className="border-b border-black/5 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-10">
           <div>
             <h2 className="text-3xl font-bold text-brand md:text-4xl">
