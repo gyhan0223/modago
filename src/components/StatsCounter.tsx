@@ -100,7 +100,7 @@ export default function StatsCounter() {
       },
       {
         title: "2025학년도 주요 합격",
-        description: "올해 확인된 대표 합격자를 대학별로 추린 숫자입니다.",
+        description: "올해 확인된 합격자를 대학별로 추린 숫자입니다.",
         duplicateShowMore: true,
         highlightStat: {
           label: "2025학년도 총 합격자",

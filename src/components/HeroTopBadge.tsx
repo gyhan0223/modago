@@ -46,6 +46,8 @@ export default function HeroTopBadge() {
         transition={{ duration: 1.8, ease: "easeOut" }}
         className="text-xl text-2xl text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
       >
+        모두다른고양이 입시미술학원
+        <br />
         홍대 앞 본원
       </motion.div>
     </div>

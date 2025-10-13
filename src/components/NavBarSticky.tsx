@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 
 /**
  * 히어로 바로 아래에 배치하면,
@@ -70,10 +69,37 @@ export default function NavBarSticky() {
                 합격자
               </a>
             </li>
-            <li>
-              <a href="#gallery" className="hover:text-brand">
+            <li className="relative group">
+              <a
+                href="#gallery"
+                className="hover:text-brand focus-visible:outline-none focus-visible:text-brand"
+              >
                 갤러리
               </a>
+              <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 w-48 -translate-x-1/2 rounded-lg border border-black/5 bg-white/95 p-2 text-sm shadow-lg opacity-0 transition-opacity duration-150 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                <ul className="space-y-1 text-left">
+                  {[
+                    "인체",
+                    "소묘",
+                    "발상과 표현",
+                    "무대 디자인",
+                    "기초 소양",
+                    "기초 디자인",
+                    "포트폴리오 1",
+                    "포트폴리오 2",
+                    "포트폴리오 3",
+                  ].map((label) => (
+                    <li key={label}>
+                      <a
+                        href="#gallery"
+                        className="block rounded-md px-3 py-1.5 text-gray-700 transition hover:bg-gray-100 hover:text-brand focus-visible:outline-none focus-visible:bg-gray-100 focus-visible:text-brand"
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </li>
             <li>
               <a href="#program" className="hover:text-brand">

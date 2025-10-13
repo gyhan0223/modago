@@ -1,0 +1,36 @@
+[33mf1e6ee7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Merge pull request #12 from gyhan0223/codex/organize-gallery-into-sections
+[33m7c4b18b[m[33m ([m[1;31morigin/codex/organize-gallery-into-sections[m[33m)[m Organize sticky gallery by category
+[33m578d7d7[m 02
+[33mc850c39[m Merge pull request #11 from gyhan0223/codex/add-image-slideshow-functionality
+[33m112ccc0[m[33m ([m[1;31morigin/codex/add-image-slideshow-functionality[m[33m)[m Add auto-advancing studio carousel
+[33m3a0f754[m 01
+[33m9b75f26[m Merge pull request #10 from gyhan0223/codex/add-intro-section-above-containers
+[33m7a24f4f[m[33m ([m[1;31morigin/codex/add-intro-section-above-containers[m[33m)[m Add section header highlighting Modago difference
+[33mbc5bce6[m 00
+[33mb4da61f[m Merge pull request #9 from gyhan0223/codex/create-container-for-total-2025-applicants
+[33md12a0ef[m[33m ([m[1;31morigin/codex/create-container-for-total-2025-applicants[m[33m)[m Add highlight card for 2025 admissions totals
+[33md60df2c[m 2025학년도 합격자 더보기 추가
+[33m7fbb479[m Merge pull request #8 from gyhan0223/codex/add-more-results-for-2025-admissions
+[33m91c5a86[m[33m ([m[1;31morigin/codex/add-more-results-for-2025-admissions[m[33m)[m Add extra show more button for 2025 stats section
+[33m4dbce2b[m 2025학년도 합격자 수 추가
+[33m4560865[m Merge pull request #7 from gyhan0223/codex/add-load-more-button-for-stats
+[33m10cdef2[m[33m ([m[1;31morigin/codex/add-load-more-button-for-stats[m[33m)[m Add show more control for stats sections
+[33mf90596f[m ..
+[33m67d0fb7[m Merge pull request #6 from gyhan0223/codex/restructure-acceptance-stats-display
+[33m5b5b840[m[33m ([m[1;31morigin/codex/restructure-acceptance-stats-display[m[33m)[m Highlight total admissions stat
+[33mb4bdaa2[m Merge pull request #5 from gyhan0223/codex/rebuild-statscounter-for-clear-reporting
+[33m7bde576[m[33m ([m[1;31morigin/codex/rebuild-statscounter-for-clear-reporting[m[33m)[m refactor: rebuild stats counter with 2025 highlights
+[33mf064996[m Hero 완성
+[33m5dc64e4[m Merge pull request #4 from gyhan0223/codex/revamp-website-based-on-design-references
+[33md7feb57[m[33m ([m[1;31morigin/codex/revamp-website-based-on-design-references[m[33m)[m Revamp landing page layout
+[33m891ac27[m Find issue with text-brand color display
+[33mef46c55[m Merge pull request #2 from gyhan0223/codex/add-fade-in-effect-to-herotopbadge-text
+[33me6ebfb1[m[33m ([m[1;31morigin/codex/add-fade-in-effect-to-herotopbadge-text[m[33m)[m Slow fade-in for hero badge text
+[33mee86027[m Merge pull request #1 from gyhan0223/codex/fix-navigation-bar-fixed-position
+[33m90d9494[m[33m ([m[1;31morigin/codex/fix-navigation-bar-fixed-position[m[33m)[m Fix sticky navbar pinning
+[33mfcc60a7[m 네비게이션 바 안 보이게 내리고 하단에 화살표 추가
+[33mb9068b2[m HeroTopBadge 완성, 네비게이션 바 안 보이게 내리고 하단에 화살표 추가해야함 + 네비게이션 상단 고정 안됨 + 지금까지의 합격자가 증명합니다 이런 거 추가
+[33m8c03db8[m 네비게이션 넣기 전
+[33ma4fa86f[m 뼈대 작업 1
+[33mffaefa8[m init: first commit
+[33mb4f560b[m Initial commit from Create Next App
