@@ -5,6 +5,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type KeyboardEvent as ReactKeyboardEvent,
   type TouchEvent,
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -280,7 +281,102 @@ export default function StickyGallery() {
     images: GalleryImage[];
     currentIndex: number;
   } | null>(null);
+  const [activeSectionId, setActiveSectionId] = useState(
+    gallerySections[0]?.id ?? ""
+  );
+  const tabsContainerRef = useRef<HTMLDivElement | null>(null);
   const touchStartX = useRef<number | null>(null);
+
+  const activeSection = useMemo(() => {
+    return (
+      gallerySections.find((section) => section.id === activeSectionId) ??
+      gallerySections[0]
+    );
+  }, [activeSectionId]);
+
+  const scrollToTabs = useCallback(
+    (behavior: ScrollBehavior = "smooth") => {
+      if (typeof window === "undefined") {
+        return;
+      }
+
+      const container = tabsContainerRef.current;
+      if (!container) {
+        return;
+      }
+
+      container.scrollIntoView({
+        behavior,
+        block: "start",
+        inline: "nearest",
+      });
+    },
+    []
+  );
+
+  const syncSectionWithHash = useCallback(
+    (behavior: ScrollBehavior = "auto") => {
+      if (typeof window === "undefined") {
+        return;
+      }
+
+      const hash = window.location.hash.replace(/^#/, "");
+      if (!hash) {
+        return;
+      }
+
+      if (hash === "gallery") {
+        window.requestAnimationFrame(() => {
+          scrollToTabs(behavior);
+        });
+        return;
+      }
+
+      const matchedSection = gallerySections.find(
+        (section) => getGallerySectionId(section.id) === hash
+      );
+
+      if (!matchedSection) {
+        return;
+      }
+
+      setActiveSectionId(matchedSection.id);
+
+      window.requestAnimationFrame(() => {
+        scrollToTabs(behavior);
+      });
+    },
+    [scrollToTabs]
+  );
+
+  const handleTabSelect = useCallback((sectionId: string) => {
+    setActiveSectionId(sectionId);
+
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const newHash = `#${getGallerySectionId(sectionId)}`;
+
+    if (window.location.hash !== newHash) {
+      window.history.replaceState(null, "", newHash);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    syncSectionWithHash("auto");
+
+    const handleHashChange = () => {
+      syncSectionWithHash("smooth");
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, [syncSectionWithHash]);
 
   const openLightbox = useCallback((images: GalleryImage[], index: number) => {
     setLightboxState({ images, currentIndex: index });
@@ -385,60 +481,124 @@ export default function StickyGallery() {
     return lightboxState.images[lightboxState.currentIndex];
   }, [lightboxState]);
 
+  const handleTabKeyDown = useCallback(
+    (event: ReactKeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+        return;
+      }
+
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const nextIndex =
+        (currentIndex + direction + gallerySections.length) %
+        gallerySections.length;
+      const nextSection = gallerySections[nextIndex];
+
+      if (!nextSection) {
+        return;
+      }
+
+      handleTabSelect(nextSection.id);
+
+      if (typeof window !== "undefined") {
+        window.requestAnimationFrame(() => {
+          const nextButton = document.getElementById(
+            `${nextSection.id}-tab`
+          ) as HTMLButtonElement | null;
+          nextButton?.focus();
+        });
+      }
+    },
+    [handleTabSelect]
+  );
+
   return (
     <section id="gallery" className="relative">
-      <div className="border-b border-black/5 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+      <div
+        ref={tabsContainerRef}
+        className="border-b border-black/5 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/70"
+      >
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-10">
           <div>
             <h2 className="text-3xl font-bold text-brand md:text-4xl">
               학생 작품 갤러리
             </h2>
             <p className="mt-2 text-sm text-gray-500 md:text-base">
-              카테고리를 선택하면 해당 작업 섹션으로 이동합니다.
+              카테고리를 선택하면 아래의 갤러리 작품이 즉시 변경됩니다.
             </p>
           </div>
           <div className="-mx-2 overflow-x-auto">
-            <div className="flex gap-2 px-2 pb-2">
-              {gallerySections.map((tab) => (
-                <a
-                  key={tab.id}
-                  href={`#${getGallerySectionId(tab.id)}`}
-                  className="inline-flex items-center rounded-full border border-brand/20 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:border-brand hover:bg-brand/5 hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-                >
-                  {tab.label}
-                </a>
-              ))}
+            <div
+              className="flex gap-2 px-2 pb-2"
+              role="tablist"
+              aria-label="학생 작품 갤러리 카테고리"
+            >
+              {gallerySections.map((tab, index) => {
+                const isActive = tab.id === activeSection?.id;
+                const panelId = getGallerySectionId(tab.id);
+
+                return (
+                  <button
+                    key={tab.id}
+                    id={`${tab.id}-tab`}
+                    type="button"
+                    role="tab"
+                    tabIndex={isActive ? 0 : -1}
+                    aria-selected={isActive}
+                    aria-controls={panelId}
+                    onClick={() => handleTabSelect(tab.id)}
+                    onKeyDown={(event) => handleTabKeyDown(event, index)}
+                    className={[
+                      "inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium shadow-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white",
+                      isActive
+                        ? "border-brand bg-brand text-white"
+                        : "border-brand/20 bg-white text-gray-700 hover:border-brand hover:bg-brand/5 hover:text-brand",
+                    ].join(" ")}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="space-y-20 bg-white py-16">
-        {gallerySections.map((section) => (
-          <section
-            key={section.id}
-            id={getGallerySectionId(section.id)}
-            className="scroll-mt-36"
-            aria-labelledby={`${section.id}-heading`}
-          >
-            <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6">
+      <div className="bg-white py-16">
+        <AnimatePresence mode="wait" initial={false}>
+          {activeSection ? (
+            <motion.section
+              key={activeSection.id}
+              id={getGallerySectionId(activeSection.id)}
+              role="tabpanel"
+              aria-labelledby={`${activeSection.id}-tab`}
+              className="mx-auto flex w-full max-w-6xl scroll-mt-36 flex-col gap-6 px-6"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.2 }}
+            >
               <div>
                 <h3
-                  id={`${section.id}-heading`}
+                  id={`${activeSection.id}-heading`}
                   className="text-2xl font-semibold text-gray-900 md:text-3xl"
                 >
-                  {section.label}
+                  {activeSection.label}
                 </h3>
-                {section.description ? (
+                {activeSection.description ? (
                   <p className="mt-2 text-sm text-gray-500 md:text-base">
-                    {section.description}
+                    {activeSection.description}
                   </p>
                 ) : null}
               </div>
-              <GalleryCarousel section={section} onImageClick={openLightbox} />
-            </div>
-          </section>
-        ))}
+              <GalleryCarousel
+                key={activeSection.id}
+                section={activeSection}
+                onImageClick={openLightbox}
+              />
+            </motion.section>
+          ) : null}
+        </AnimatePresence>
       </div>
 
       <AnimatePresence>
