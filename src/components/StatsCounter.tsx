@@ -8,6 +8,8 @@ type Stat = {
   value: number;
   suffix?: string;
   helper?: string;
+  parentheticalValue?: number;
+  parentheticalSuffix?: string;
 };
 
 type StatSection = {
@@ -31,6 +33,47 @@ function Counter({ to, run }: { to: number; run: boolean }) {
   useEffect(() => mv.on("change", (v) => setVal(Math.round(v))), [mv]);
 
   return <span>{val.toLocaleString()}</span>;
+}
+
+function StatValue({
+  value,
+  suffix,
+  run,
+  parentheticalValue,
+  parentheticalSuffix,
+  className = "",
+  parentheticalClassName = "",
+}: {
+  value: number;
+  suffix?: string;
+  run: boolean;
+  parentheticalValue?: number;
+  parentheticalSuffix?: string;
+  className?: string;
+  parentheticalClassName?: string;
+}) {
+  const resolvedParentheticalSuffix = parentheticalSuffix ?? suffix;
+
+  return (
+    <div className="flex items-baseline gap-3 flex-wrap">
+      <span className={`inline-flex items-baseline gap-1 ${className}`}>
+        <Counter to={value} run={run} />
+        {suffix ? <span>{suffix}</span> : null}
+      </span>
+      {parentheticalValue !== undefined ? (
+        <span
+          className={`inline-flex items-baseline gap-1 text-slate-300 ${parentheticalClassName}`}
+        >
+          (
+          <Counter to={parentheticalValue} run={run} />
+          {resolvedParentheticalSuffix ? (
+            <span>{resolvedParentheticalSuffix}</span>
+          ) : null}
+          )
+        </span>
+      ) : null}
+    </div>
+  );
 }
 
 export default function StatsCounter() {
@@ -107,6 +150,8 @@ export default function StatsCounter() {
           value: 343,
           suffix: "명",
           helper: "*괄호 안 숫자는 본원 합격 수입니다.",
+          parentheticalValue: 343,
+          parentheticalSuffix: "명",
         },
         stats: [
           { label: "건국대학교", value: 43, suffix: "명" },
@@ -224,10 +269,19 @@ export default function StatsCounter() {
                     }
                     className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-white/20 bg-white/10 p-8 shadow-[0_25px_45px_-20px_rgba(15,23,42,0.8)]"
                   >
-                    <div className="text-4xl md:text-5xl font-bold">
-                      <Counter to={section.highlightStat.value} run={inView} />
-                      {section.highlightStat.suffix}
-                    </div>
+                    <StatValue
+                      value={section.highlightStat.value}
+                      suffix={section.highlightStat.suffix}
+                      parentheticalValue={
+                        section.highlightStat.parentheticalValue
+                      }
+                      parentheticalSuffix={
+                        section.highlightStat.parentheticalSuffix
+                      }
+                      run={inView}
+                      className="text-4xl md:text-5xl font-bold"
+                      parentheticalClassName="text-2xl md:text-3xl font-semibold"
+                    />
                     <div className="mt-2 text-base font-semibold text-slate-100">
                       {section.highlightStat.label}
                     </div>
@@ -263,10 +317,15 @@ export default function StatsCounter() {
                       }
                       className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_15px_35px_-15px_rgba(15,23,42,0.6)]"
                     >
-                      <div className="text-3xl font-bold">
-                        <Counter to={stat.value} run={inView} />
-                        {stat.suffix}
-                      </div>
+                      <StatValue
+                        value={stat.value}
+                        suffix={stat.suffix}
+                        parentheticalValue={stat.parentheticalValue}
+                        parentheticalSuffix={stat.parentheticalSuffix}
+                        run={inView}
+                        className="text-3xl font-bold"
+                        parentheticalClassName="text-xl font-semibold"
+                      />
                       <div className="mt-1 text-sm font-medium text-slate-100">
                         {stat.label}
                       </div>
