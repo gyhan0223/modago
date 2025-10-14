@@ -47,7 +47,7 @@ export default function StatsCounter() {
           label: "최종 합격자",
           value: 6405,
           suffix: "명",
-          helper: "전 대학 및 전공 누적",
+          helper: "*본원 외 지점 포함",
         },
         stats: [
           { label: "홍익대학교", value: 764, suffix: "명" },
@@ -106,7 +106,7 @@ export default function StatsCounter() {
           label: "2025학년도 총 합격자",
           value: 343,
           suffix: "명",
-          helper: "주요 합격 집계",
+          helper: "*괄호 안 숫자는 본원 합격 수입니다.",
         },
         stats: [
           { label: "건국대학교", value: 43, suffix: "명" },
