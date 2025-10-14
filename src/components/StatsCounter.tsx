@@ -55,7 +55,6 @@ export default function StatsCounter() {
           { label: "국민대학교", value: 416, suffix: "명" },
           { label: "한국예술종합학교", value: 403, suffix: "명" },
           { label: "건국대학교", value: 386, suffix: "명" },
-          { label: "건국대학교", value: 386, suffix: "명" },
           { label: "상명대학교", value: 293, suffix: "명" },
           { label: "동덕여자대학교", value: 257, suffix: "명" },
           { label: "서울과학기술대학교", value: 253, suffix: "명" },
@@ -106,7 +105,7 @@ export default function StatsCounter() {
           label: "2025학년도 총 합격자",
           value: 343,
           suffix: "명",
-          helper: "*괄호 안 숫자는 본원 합격 수입니다.",
+          helper: "주요 합격 집계",
         },
         stats: [
           { label: "건국대학교", value: 43, suffix: "명" },
@@ -227,6 +226,19 @@ export default function StatsCounter() {
                     <div className="text-4xl md:text-5xl font-bold">
                       <Counter to={section.highlightStat.value} run={inView} />
                       {section.highlightStat.suffix}
+                      {typeof section.highlightStat.main === "number" && (
+                        <span className="ml-2 align-baseline text-2xl font-semibold text-slate-300">
+                          (
+                          <Counter
+                            to={section.highlightStat.main}
+                            run={inView}
+                          />
+                          {section.highlightStat.mainSuffix ??
+                            section.highlightStat.suffix ??
+                            ""}
+                          )
+                        </span>
+                      )}
                     </div>
                     <div className="mt-2 text-base font-semibold text-slate-100">
                       {section.highlightStat.label}
@@ -266,6 +278,13 @@ export default function StatsCounter() {
                       <div className="text-3xl font-bold">
                         <Counter to={stat.value} run={inView} />
                         {stat.suffix}
+                        {typeof stat.main === "number" && (
+                          <span className="ml-1 align-baseline text-xl font-semibold text-slate-300">
+                            (
+                            <Counter to={stat.main} run={inView} />
+                            {stat.mainSuffix ?? stat.suffix ?? ""})
+                          </span>
+                        )}
                       </div>
                       <div className="mt-1 text-sm font-medium text-slate-100">
                         {stat.label}

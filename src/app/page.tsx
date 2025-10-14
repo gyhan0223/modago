@@ -235,6 +235,9 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-lg md:text-xl text-gray-600"
           >
+            시작점은 모두 다릅니다.
+            <br />
+            <br />
             처음 시작하는 학생부터 이미 준비 중인 학생까지
             <br />
             개인의 실기 수준과 목표에 맞춰 1:1 맞춤형 커리큘럼으로 지도합니다.
@@ -279,7 +282,7 @@ export default function Home() {
                   </h3>
                   <p className="mt-4 text-base leading-relaxed text-gray-600">
                     {idx === 0 &&
-                      "담임제 시스템으로 목표 대학, 전공, 현재 실력을 분석하고 맞춤형 지도를 설계합니다."}
+                      "담임제 시스템으로 목표 대학 및 현재 실력을 분석하고 맞춤형 지도를 설계합니다."}
                     {idx === 1 &&
                       "매 수업마다 실전 평가와 리뷰를 병행해 작업 흐름을 다듬고 포트폴리오 완성도를 끌어올립니다."}
                     {idx === 2 &&
