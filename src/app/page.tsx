@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
 import NavBarSticky from "@/components/NavBarSticky";
 import HeroTopBadge from "@/components/HeroTopBadge";
 import HeroScrollArrow from "@/components/HeroScrollArrow";
@@ -251,47 +252,89 @@ export default function Home() {
 
       {/* Signature Highlights */}
       <section className="bg-gray-50 py-24">
-        <div className="text-center max-w-2xl mx-auto px-6">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
-            modago difference
-          </p>
-          <h2 className="mt-4 text-3xl md:text-4xl font-semibold text-slate-900">
-            모다고가 다른 학원과 다른 이유
-          </h2>
-          <p className="mt-4 text-base text-slate-500">
-            수많은 합격 사례를 넘어, 학습 경험 자체를 바꾸는 시스템으로 학생의
-            가능성을 입증합니다.
-          </p>
-        </div>
-        <div className="max-w-6xl mx-auto mt-16 px-6 grid gap-6 md:grid-cols-3">
-          {["개인 맞춤 지도", "실전 기반 피드백", "실기 + 학과 연계"].map(
-            (title, idx) => (
-              <motion.article
-                key={title}
-                {...fadeUp}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                <div className="relative z-10">
-                  <p className="text-sm uppercase tracking-[0.35em] text-gray-400">
-                    signature 0{idx + 1}
-                  </p>
-                  <h3 className="mt-4 text-2xl font-semibold text-gray-900">
-                    {title}
-                  </h3>
-                  <p className="mt-4 text-base leading-relaxed text-gray-600">
-                    {idx === 0 &&
-                      "담임제 시스템으로 목표 대학 및 현재 실력을 분석하고 맞춤형 지도를 설계합니다."}
-                    {idx === 1 &&
-                      "매 수업마다 실전 평가와 리뷰를 병행해 작업 흐름을 다듬고 포트폴리오 완성도를 끌어올립니다."}
-                    {idx === 2 &&
-                      "국내에서 유일하게 수만휘와 연계하여 실기뿐만 아니라 성적 또한 책임집니다."}
-                  </p>
-                </div>
-              </motion.article>
-            )
-          )}
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+            <motion.div {...fadeUp} className="lg:col-span-5">
+              <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+                modago difference
+              </p>
+              <h2 className="mt-5 text-3xl md:text-4xl font-semibold leading-tight text-slate-900">
+                모다고가 다른 학원과 다른 이유
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-slate-600">
+                수많은 합격 사례를 넘어, 학습 경험 자체를 바꾸는 시스템으로 학생의 가능성을 입증합니다.
+              </p>
+            </motion.div>
+
+            <motion.ul
+              {...fadeUp}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:col-span-7 grid grid-cols-1 gap-6 sm:grid-cols-2"
+            >
+              {[
+                {
+                  title: "실기 + 학과",
+                  desc: "작업력과 학과적합성을 함께 훈련해 ‘작업–서류–면접’을 한 줄로 연결합니다.",
+                },
+                {
+                  title: "개인 맞춤 커리큘럼",
+                  desc: "진단/목표/시간을 수치화해 주차별 스프린트에 ‘딱 필요한 과제’만 배치합니다.",
+                },
+                {
+                  title: "상위권 대학",
+                  desc: "출제경향 DB와 블라인드 모의실기로 심사 기준을 일관되게 충족하도록 점검합니다.",
+                },
+                {
+                  title: "미술활동보고서",
+                  desc: "STAR/PEEL로 과정 증빙을 구조화하고 금지 표현/리스크를 사전 차단합니다.",
+                },
+              ].map((point) => (
+                <li
+                  key={point.title}
+                  className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-slate-900" aria-hidden />
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">{point.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-gray-600">{point.desc}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </motion.ul>
+          </div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {["개인 맞춤 지도", "실전 기반 피드백", "실기 + 학과 연계"].map(
+              (title, idx) => (
+                <motion.article
+                  key={title}
+                  {...fadeUp}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+                  <div className="relative z-10">
+                    <p className="text-sm uppercase tracking-[0.35em] text-gray-400">
+                      signature 0{idx + 1}
+                    </p>
+                    <h3 className="mt-4 text-2xl font-semibold text-gray-900">
+                      {title}
+                    </h3>
+                    <p className="mt-4 text-base leading-relaxed text-gray-600">
+                      {idx === 0 &&
+                        "담임제 시스템으로 목표 대학 및 현재 실력을 분석하고 맞춤형 지도를 설계합니다."}
+                      {idx === 1 &&
+                        "매 수업마다 실전 평가와 리뷰를 병행해 작업 흐름을 다듬고 포트폴리오 완성도를 끌어올립니다."}
+                      {idx === 2 &&
+                        "국내에서 유일하게 수만휘와 연계하여 실기뿐만 아니라 성적 또한 책임집니다."}
+                    </p>
+                  </div>
+                </motion.article>
+              )
+            )}
+          </div>
         </div>
       </section>
 
