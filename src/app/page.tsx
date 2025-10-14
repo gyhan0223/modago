@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import NavBarSticky from "@/components/NavBarSticky";
 import HeroTopBadge from "@/components/HeroTopBadge";
 import HeroScrollArrow from "@/components/HeroScrollArrow";
@@ -40,21 +41,105 @@ const STUDIO_SLIDES: StudioSlide[] = [
   },
 ];
 
+const DISPLAY_DELAY = 3000;
+const MAX_WAIT_FOR_NEXT = 4000;
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [loadedSlides, setLoadedSlides] = useState<boolean[]>(() =>
+    STUDIO_SLIDES.map(() => false),
+  );
+
+  const loadedIndicesRef = useRef(new Set<number>());
+  const preloadingRef = useRef(new Set<number>());
+
+  const markSlideLoaded = useCallback((index: number) => {
+    if (loadedIndicesRef.current.has(index)) return;
+    loadedIndicesRef.current.add(index);
+    setLoadedSlides((prev) => {
+      if (prev[index]) return prev;
+      const next = [...prev];
+      next[index] = true;
+      return next;
+    });
+  }, []);
+
+  const prefetchImage = useCallback(
+    (index: number) => {
+      if (typeof window === "undefined") return;
+      if (loadedIndicesRef.current.has(index)) return;
+      if (preloadingRef.current.has(index)) return;
+
+      preloadingRef.current.add(index);
+
+      const img = new window.Image();
+      img.src = STUDIO_SLIDES[index].src;
+
+      const finalize = () => {
+        preloadingRef.current.delete(index);
+        markSlideLoaded(index);
+      };
+
+      if ("decode" in img && typeof img.decode === "function") {
+        img
+          .decode()
+          .then(finalize)
+          .catch(finalize);
+      } else {
+        img.onload = finalize;
+        img.onerror = finalize;
+      }
+    },
+    [markSlideLoaded],
+  );
+
+  useEffect(() => {
+    const total = STUDIO_SLIDES.length;
+    if (total === 0) return;
+
+    const indicesToPrefetch = new Set<number>();
+    indicesToPrefetch.add(currentSlide);
+    indicesToPrefetch.add((currentSlide + 1) % total);
+    indicesToPrefetch.add((currentSlide + 2) % total);
+
+    indicesToPrefetch.forEach((index) => prefetchImage(index));
+  }, [currentSlide, prefetchImage]);
 
   useEffect(() => {
     if (isPaused) return;
 
-    const timer = window.setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % STUDIO_SLIDES.length);
-    }, 5000);
+    const total = STUDIO_SLIDES.length;
+    if (total <= 1) return;
+
+    const nextIndex = (currentSlide + 1) % total;
+    let delayTimer: number | undefined;
+    let fallbackTimer: number | undefined;
+
+    const scheduleAdvance = () => {
+      if (delayTimer !== undefined) return;
+      delayTimer = window.setTimeout(() => {
+        setCurrentSlide(nextIndex);
+      }, DISPLAY_DELAY);
+    };
+
+    if (loadedSlides[nextIndex]) {
+      scheduleAdvance();
+    } else {
+      fallbackTimer = window.setTimeout(() => {
+        scheduleAdvance();
+      }, MAX_WAIT_FOR_NEXT);
+    }
 
     return () => {
-      window.clearInterval(timer);
+      if (delayTimer !== undefined) {
+        window.clearTimeout(delayTimer);
+      }
+      if (fallbackTimer !== undefined) {
+        window.clearTimeout(fallbackTimer);
+      }
     };
-  }, [isPaused]);
+  }, [currentSlide, isPaused, loadedSlides]);
 
   const goToSlide = (index: number) => {
     const total = STUDIO_SLIDES.length;
@@ -267,17 +352,39 @@ export default function Home() {
               onMouseLeave={() => setIsPaused(false)}
             >
               <div className="relative aspect-[4/3] w-full">
-                {STUDIO_SLIDES.map((slide, index) => (
-                  <img
-                    key={slide.src}
-                    src={slide.src}
-                    alt={slide.alt}
-                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
-                      index === currentSlide ? "opacity-100" : "opacity-0"
-                    }`}
-                    aria-hidden={index !== currentSlide}
-                  />
-                ))}
+                {STUDIO_SLIDES.map((slide, index) => {
+                  const isActive = index === currentSlide;
+                  const isLoaded = loadedSlides[index];
+                  const shouldPriority = index === 0;
+
+                  return (
+                    <div
+                      key={slide.src}
+                      className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+                        isActive ? "opacity-100" : "opacity-0"
+                      }`}
+                      aria-hidden={!isActive}
+                    >
+                      <Image
+                        fill
+                        priority={shouldPriority}
+                        sizes="(min-width: 1024px) 640px, (min-width: 768px) 70vw, 100vw"
+                        src={slide.src}
+                        alt={slide.alt}
+                        className="h-full w-full object-cover"
+                        onLoadingComplete={() => markSlideLoaded(index)}
+                        placeholder="blur"
+                        blurDataURL="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Crect width='10' height='6' fill='%23f3f4f6'/%3E%3C/svg%3E"
+                        quality={85}
+                      />
+                      {!isLoaded && (
+                        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-gray-100">
+                          <div className="h-12 w-12 animate-spin rounded-full border-2 border-brand/60 border-t-transparent" />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
 
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-1/2 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
