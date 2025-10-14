@@ -6,6 +6,11 @@ export type GalleryTab = {
 
 export const galleryTabs: GalleryTab[] = [
   {
+    id: "gallery",
+    label: "갤러리",
+    description: "갤러리",
+  },
+  {
     id: "figure",
     label: "인체",
     description: "기초 인체 드로잉과 다양한 포즈 연구",

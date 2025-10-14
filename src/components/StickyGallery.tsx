@@ -11,6 +11,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { galleryTabs, getGallerySectionId } from "@/data/galleryTabs";
 
 const galleryImagesByTab: Record<string, string[]> = {
+  gallery: [
+    "/gallery/01.jpg",
+    "/gallery/02.jpg",
+    "/gallery/03.jpg",
+    "/gallery/04.jpg",
+    "/gallery/05.jpg",
+    "/gallery/06.jpg",
+  ],
   figure: [
     "/figure/01.jpg",
     "/figure/02.jpg",
@@ -142,7 +150,7 @@ type GalleryImage = {
   delay: number;
 };
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 3;
 
 function chunkArray<T>(items: T[], size: number) {
   const chunks: T[][] = [];
@@ -214,7 +222,7 @@ function GalleryCarousel({
           {pages.map((page, pageIndex) => (
             <div
               key={`${section.id}-page-${pageIndex}`}
-              className="grid min-w-full grid-cols-2 gap-4 md:grid-cols-3 md:gap-6"
+              className="grid min-w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6"
             >
               {page.map((image, imageIndex) => {
                 const globalIndex = pageIndex * PAGE_SIZE + imageIndex;
