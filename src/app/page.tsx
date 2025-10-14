@@ -48,7 +48,7 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [loadedSlides, setLoadedSlides] = useState<boolean[]>(() =>
-    STUDIO_SLIDES.map(() => false),
+    STUDIO_SLIDES.map(() => false)
   );
 
   const loadedIndicesRef = useRef(new Set<number>());
@@ -82,16 +82,13 @@ export default function Home() {
       };
 
       if ("decode" in img && typeof img.decode === "function") {
-        img
-          .decode()
-          .then(finalize)
-          .catch(finalize);
+        img.decode().then(finalize).catch(finalize);
       } else {
         img.onload = finalize;
         img.onerror = finalize;
       }
     },
-    [markSlideLoaded],
+    [markSlideLoaded]
   );
 
   useEffect(() => {
@@ -229,7 +226,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-5xl font-semibold leading-tight text-gray-900"
           >
-            합격, 그 이상의 가치를 만드는 미술 교육
+            누구나, 지금 수준에서 시작할 수 있는 미술 교육
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -238,9 +235,11 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-lg md:text-xl text-gray-600"
           >
-            주입식 수업 대신 시선과 손끝을 단련시키는 커리큘럼으로 <br />
-            미대 입시뿐만 아니라 졸업 후에도 <br />
-            목표에 맞춘 맞춤 지도를 진행합니다.
+            처음 시작하는 학생부터 이미 준비 중인 학생까지
+            <br />
+            개인의 실기 수준과 목표에 맞춰 1:1 맞춤형 커리큘럼으로 지도합니다.
+            <br />
+            부담 없이 시작하고, 꾸준히 성장할 수 있도록 함께합니다.
           </motion.p>
         </div>
       </section>
@@ -608,7 +607,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mt-4 text-3xl md:text-4xl font-semibold text-gray-900"
           >
-            합격 이후에도 이어지는 작업의 자신감을 기릅니다
+            국내외 미대 합격생들이 전하는 생생한 후기입니다.
           </motion.h2>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {[
@@ -624,8 +623,8 @@ export default function Home() {
               },
               {
                 quote:
-                  "해외 미대 지원에 필요한 서류와 촬영까지 세세하게 코칭해주신 덕분에 장학금까지 받았습니다.",
-                name: "미국 RISD 합격생",
+                  "단 두 달 만에 포트폴리오를 준비해 7개의 해외 미대에 모두 합격하고, 장학금까지 받을 수 있었어요.",
+                name: "미국 NYU 합격생",
               },
             ].map((testimonial, idx) => (
               <motion.blockquote

@@ -47,7 +47,7 @@ export default function StatsCounter() {
           label: "최종 합격자",
           value: 6405,
           suffix: "명",
-          helper: "*본원 외 지점 포함",
+          helper: "전 대학 및 전공 누적",
         },
         stats: [
           { label: "홍익대학교", value: 764, suffix: "명" },
