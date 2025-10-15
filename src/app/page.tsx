@@ -251,89 +251,171 @@ export default function Home() {
       <StatsCounter />
 
       {/* Signature Highlights */}
-      <section className="bg-gray-50 py-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+      <section className="bg-gray-50 py-28">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-1 items-center gap-12">
+            {/* Left: Big headline */}
             <motion.div {...fadeUp} className="lg:col-span-5">
-              <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+              <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-slate-400">
                 modago difference
               </p>
-              <h2 className="mt-5 text-3xl md:text-4xl font-semibold leading-tight text-slate-900">
-                모다고가 다른 학원과 다른 이유
+              <h2 className="mt-4 text-5xl md:text-6xl font-semibold leading-[1.08] tracking-[-0.01em] text-slate-900">
+                모다고가 다른 학원과
+                <br className="hidden md:block" />
+                다른 이유
               </h2>
-              <p className="mt-5 text-base leading-relaxed text-slate-600">
-                수많은 합격 사례를 넘어, 학습 경험 자체를 바꾸는 시스템으로 학생의 가능성을 입증합니다.
+              <p className="mt-6 text-lg leading-relaxed text-slate-600 max-w-prose">
+                수많은 합격 사례를 넘어, 학습 경험 자체를 바꾸는 시스템으로
+                학생의 가능성을 입증합니다.
               </p>
             </motion.div>
 
+            {/* Right: Visual/Highlights grid (asymmetric like Toss) */}
             <motion.ul
               {...fadeUp}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="lg:col-span-7 grid grid-cols-1 gap-6 sm:grid-cols-2"
+              className="lg:col-span-7 flex flex-col gap-6"
             >
               {[
-                {
-                  title: "실기 + 학과",
-                  desc: "작업력과 학과적합성을 함께 훈련해 ‘작업–서류–면접’을 한 줄로 연결합니다.",
-                },
+                { title: "실기 + 학과", desc: "", layout: "" },
                 {
                   title: "개인 맞춤 커리큘럼",
                   desc: "진단/목표/시간을 수치화해 주차별 스프린트에 ‘딱 필요한 과제’만 배치합니다.",
+                  layout: "",
                 },
                 {
                   title: "상위권 대학",
                   desc: "출제경향 DB와 블라인드 모의실기로 심사 기준을 일관되게 충족하도록 점검합니다.",
+                  layout: "",
                 },
                 {
                   title: "미술활동보고서",
                   desc: "STAR/PEEL로 과정 증빙을 구조화하고 금지 표현/리스크를 사전 차단합니다.",
+                  layout: "",
                 },
-              ].map((point) => (
-                <li
-                  key={point.title}
-                  className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-                >
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-slate-900" aria-hidden />
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900">{point.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-gray-600">{point.desc}</p>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </motion.ul>
-          </div>
+              ].map((point, idx) =>
+                idx === 0 ? (
+                  // --- 1) 첫 번째 카드: 다크 히어로 카드 ---
+                  <li
+                    key="hero-card-1"
+                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-900 text-white p-8 md:p-12 shadow-lg"
+                  >
+                    <div className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
+                    <div className="pointer-events-none absolute -bottom-20 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
 
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {["개인 맞춤 지도", "실전 기반 피드백", "실기 + 학과 연계"].map(
-              (title, idx) => (
-                <motion.article
-                  key={title}
-                  {...fadeUp}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                  <div className="relative z-10">
-                    <p className="text-sm uppercase tracking-[0.35em] text-gray-400">
-                      signature 0{idx + 1}
-                    </p>
-                    <h3 className="mt-4 text-2xl font-semibold text-gray-900">
-                      {title}
-                    </h3>
-                    <p className="mt-4 text-base leading-relaxed text-gray-600">
-                      {idx === 0 &&
-                        "담임제 시스템으로 목표 대학 및 현재 실력을 분석하고 맞춤형 지도를 설계합니다."}
-                      {idx === 1 &&
-                        "매 수업마다 실전 평가와 리뷰를 병행해 작업 흐름을 다듬고 포트폴리오 완성도를 끌어올립니다."}
-                      {idx === 2 &&
-                        "국내에서 유일하게 수만휘와 연계하여 실기뿐만 아니라 성적 또한 책임집니다."}
-                    </p>
-                  </div>
-                </motion.article>
-              )
-            )}
+                    <div className="relative z-10">
+                      <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50">
+                        실기 + 학과
+                      </p>
+                      <h3 className="mt-4 text-2xl md:text-3xl font-semibold leading-snug">
+                        모다고는 솔직하게 말씀드리겠습니다.
+                      </h3>
+                      <p className="mt-5 text-base md:text-lg leading-relaxed text-white/90">
+                        실기만 연습해서는 좋은 대학에 가기 어렵습니다.
+                        <br />
+                        학업도 병행해야 하는 게 현실입니다.
+                        <br />
+                        모다고에서는{" "}
+                        <span className="font-semibold">학과 수업</span>을 통해{" "}
+                        <span className="font-semibold">학업, 실기 모두</span>를
+                        잡아줍니다.
+                      </p>
+                    </div>
+                  </li>
+                ) : idx === 1 ? (
+                  // --- 2) 두 번째 카드: 다크 히어로 카드 ---
+                  <li
+                    key="hero-card-2"
+                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-950 text-white p-8 md:p-12 shadow-lg"
+                  >
+                    <div className="pointer-events-none absolute -top-14 -right-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
+                    <div className="pointer-events-none absolute -bottom-20 -left-24 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
+
+                    <div className="relative z-10">
+                      <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50">
+                        개인 맞춤 커리큘럼
+                      </p>
+                      <h3 className="mt-4 text-2xl md:text-3xl font-semibold leading-snug">
+                        시작점은 다르지만, 수업은 개개인에게 딱 맞게.
+                      </h3>
+                      <p className="mt-5 text-base md:text-lg leading-relaxed text-white/90">
+                        모다고에 오는 모든 학생의 시작점은 다 다릅니다.
+                        <br />
+                        하지만 개개인에 맞춘 커리큘럼을 진행하는 학원은 많지
+                        않습니다.
+                        <br />
+                        모다고는{" "}
+                        <span className="font-semibold">소수 정예</span>로
+                        수업을 진행하기 때문에 가능합니다.
+                        <br />
+                        <span className="font-semibold">
+                          개인별 최적의 커리큘럼
+                        </span>
+                        으로{" "}
+                        <span className="font-semibold">상위권 대학 합격</span>
+                        을 약속드립니다.
+                      </p>
+                    </div>
+                  </li>
+                ) : idx === 2 ? (
+                  // --- 3) 세 번째 카드: 다크 히어로 카드 (문구 다듬음) ---
+                  <li
+                    key="hero-card-3"
+                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-900 text-white p-8 md:p-12 shadow-lg"
+                  >
+                    {/* 하이라이트 방향을 또 바꿔 리듬감 주기 */}
+                    <div className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
+                    <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
+
+                    <div className="relative z-10">
+                      <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50">
+                        상위권 대학 집중
+                      </p>
+                      <h3 className="mt-4 text-2xl md:text-3xl font-semibold leading-snug">
+                        평균 등급이 낮아도, 끝까지 끌어올립니다.
+                      </h3>
+                      <p className="mt-5 text-base md:text-lg leading-relaxed text-white/90">
+                        모다고의 모든 수업은 상위권 대학 기준으로 설계합니다.
+                        <br />
+                        ‘따라갈 수 있을까’ 걱정돼도 괜찮습니다.
+                        <br />
+                        오전부터 밤까지 이어지는{" "}
+                        <span className="font-semibold">
+                          자습 · 클리닉
+                        </span>,{" "}
+                        <span className="font-semibold">담임제 케어</span>로 단
+                        한 명도 뒤처지지 않게 합니다.
+                        <br />
+                        <span className="font-semibold">주요 합격 사례</span>가
+                        그 사실을 증명합니다.
+                      </p>
+                    </div>
+                  </li>
+                ) : (
+                  // --- 4) 나머지 카드: 기존 화이트 카드 유지 ---
+                  <li
+                    key={point.title}
+                    className="group relative overflow-hidden rounded-3xl ring-1 ring-gray-200 bg-white p-7 shadow-sm transition will-change-transform hover:-translate-y-1.5 hover:shadow-lg"
+                  >
+                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-brand/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+                    <div className="relative z-10 flex items-start gap-3">
+                      <CheckCircle2
+                        className="mt-0.5 h-5 w-5 shrink-0 text-slate-900"
+                        aria-hidden
+                      />
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {point.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                          {point.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                )
+              )}
+            </motion.ul>
           </div>
         </div>
       </section>
