@@ -8,6 +8,8 @@ type Stat = {
   value: number;
   suffix?: string;
   helper?: string;
+  main?: number;
+  mainSuffix?: string;
 };
 
 type StatSection = {
