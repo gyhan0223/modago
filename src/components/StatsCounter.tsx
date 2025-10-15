@@ -194,70 +194,27 @@ export default function StatsCounter() {
         </div>
 
         <div className="mt-16 space-y-16">
-          {sections.map((section, sectionIndex) => (
-            <div key={section.title}>
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-                <div>
-                  <h3 className="text-2xl font-semibold">{section.title}</h3>
-                  <p className="mt-2 text-sm text-slate-300">
-                    {section.description}
-                  </p>
+          {sections.map((section, sectionIndex) => {
+            const highlightStat = section.highlightStat;
+            const highlightMain = highlightStat?.main;
+            const highlightMainSuffix =
+              highlightStat?.mainSuffix ?? highlightStat?.suffix ?? "";
+
+            return (
+              <div key={section.title}>
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                  <div>
+                    <h3 className="text-2xl font-semibold">{section.title}</h3>
+                    <p className="mt-2 text-sm text-slate-300">
+                      {section.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {section.highlightStat ? (
-                  <motion.article
-                    key={section.highlightStat.label}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={
-                      inView
-                        ? {
-                            opacity: 1,
-                            y: 0,
-                            transition: {
-                              delay: sectionIndex * 0.2,
-                              duration: 0.6,
-                              ease: "easeOut",
-                            },
-                          }
-                        : { opacity: 0, y: 24 }
-                    }
-                    className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-white/20 bg-white/10 p-8 shadow-[0_25px_45px_-20px_rgba(15,23,42,0.8)]"
-                  >
-                    <div className="text-4xl md:text-5xl font-bold">
-                      <Counter to={section.highlightStat.value} run={inView} />
-                      {section.highlightStat.suffix}
-                      {typeof section.highlightStat.main === "number" && (
-                        <span className="ml-2 align-baseline text-2xl font-semibold text-slate-300">
-                          (
-                          <Counter
-                            to={section.highlightStat.main}
-                            run={inView}
-                          />
-                          {section.highlightStat.mainSuffix ??
-                            section.highlightStat.suffix ??
-                            ""}
-                          )
-                        </span>
-                      )}
-                    </div>
-                    <div className="mt-2 text-base font-semibold text-slate-100">
-                      {section.highlightStat.label}
-                    </div>
-                    {section.highlightStat.helper ? (
-                      <p className="mt-3 text-sm text-slate-300">
-                        {section.highlightStat.helper}
-                      </p>
-                    ) : null}
-                  </motion.article>
-                ) : null}
-
-                {section.stats
-                  .slice(0, visibleCounts[sectionIndex])
-                  .map((stat, index) => (
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {highlightStat ? (
                     <motion.article
-                      key={stat.label}
+                      key={highlightStat.label}
                       initial={{ opacity: 0, y: 24 }}
                       animate={
                         inView
@@ -265,53 +222,99 @@ export default function StatsCounter() {
                               opacity: 1,
                               y: 0,
                               transition: {
-                                delay:
-                                  sectionIndex * 0.2 +
-                                  (section.highlightStat ? index + 1 : index) *
-                                    0.05,
+                                delay: sectionIndex * 0.2,
                                 duration: 0.6,
                                 ease: "easeOut",
                               },
                             }
                           : { opacity: 0, y: 24 }
                       }
-                      className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_15px_35px_-15px_rgba(15,23,42,0.6)]"
+                      className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-white/20 bg-white/10 p-8 shadow-[0_25px_45px_-20px_rgba(15,23,42,0.8)]"
                     >
-                      <div className="text-3xl font-bold">
-                        <Counter to={stat.value} run={inView} />
-                        {stat.suffix}
-                        {typeof stat.main === "number" && (
-                          <span className="ml-1 align-baseline text-xl font-semibold text-slate-300">
+                      <div className="text-4xl md:text-5xl font-bold">
+                        <Counter to={highlightStat.value} run={inView} />
+                        {highlightStat.suffix}
+                        {typeof highlightMain === "number" && (
+                          <span className="ml-2 align-baseline text-2xl font-semibold text-slate-300">
                             (
-                            <Counter to={stat.main} run={inView} />
-                            {stat.mainSuffix ?? stat.suffix ?? ""})
+                            <Counter to={highlightMain} run={inView} />
+                            {highlightMainSuffix})
                           </span>
                         )}
                       </div>
-                      <div className="mt-1 text-sm font-medium text-slate-100">
-                        {stat.label}
+                      <div className="mt-2 text-base font-semibold text-slate-100">
+                        {highlightStat.label}
                       </div>
-                      {stat.helper ? (
-                        <p className="mt-2 text-xs text-slate-400">
-                          {stat.helper}
+                      {highlightStat.helper ? (
+                        <p className="mt-3 text-sm text-slate-300">
+                          {highlightStat.helper}
                         </p>
                       ) : null}
                     </motion.article>
-                  ))}
-              </div>
-              {visibleCounts[sectionIndex] < section.stats.length ? (
-                <div className="mt-6 flex justify-center">
-                  <button
-                    type="button"
-                    onClick={() => showMore(sectionIndex)}
-                    className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm font-medium text-slate-100"
-                  >
-                    더보기
-                  </button>
+                  ) : null}
+
+                  {section.stats
+                    .slice(0, visibleCounts[sectionIndex])
+                    .map((stat, index) => (
+                      <motion.article
+                        key={stat.label}
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={
+                          inView
+                            ? {
+                                opacity: 1,
+                                y: 0,
+                                transition: {
+                                  delay:
+                                    sectionIndex * 0.2 +
+                                    (section.highlightStat
+                                      ? index + 1
+                                      : index) *
+                                      0.05,
+                                  duration: 0.6,
+                                  ease: "easeOut",
+                                },
+                              }
+                            : { opacity: 0, y: 24 }
+                        }
+                        className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_15px_35px_-15px_rgba(15,23,42,0.6)]"
+                      >
+                        <div className="text-3xl font-bold">
+                          <Counter to={stat.value} run={inView} />
+                          {stat.suffix}
+                          {typeof stat.main === "number" && (
+                            <span className="ml-1 align-baseline text-xl font-semibold text-slate-300">
+                              (
+                              <Counter to={stat.main} run={inView} />
+                              {stat.mainSuffix ?? stat.suffix ?? ""})
+                            </span>
+                          )}
+                        </div>
+                        <div className="mt-1 text-sm font-medium text-slate-100">
+                          {stat.label}
+                        </div>
+                        {stat.helper ? (
+                          <p className="mt-2 text-xs text-slate-400">
+                            {stat.helper}
+                          </p>
+                        ) : null}
+                      </motion.article>
+                    ))}
                 </div>
-              ) : null}
-            </div>
-          ))}
+                {visibleCounts[sectionIndex] < section.stats.length ? (
+                  <div className="mt-6 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={() => showMore(sectionIndex)}
+                      className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm font-medium text-slate-100"
+                    >
+                      더보기
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}{" "}
         </div>
       </div>
     </section>
