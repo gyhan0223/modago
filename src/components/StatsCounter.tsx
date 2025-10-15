@@ -194,21 +194,29 @@ export default function StatsCounter() {
         </div>
 
         <div className="mt-16 space-y-16">
-          {sections.map((section, sectionIndex) => (
-            <div key={section.title}>
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-                <div>
-                  <h3 className="text-2xl font-semibold">{section.title}</h3>
-                  <p className="mt-2 text-sm text-slate-300">
-                    {section.description}
+          {sections.map((section, sectionIndex) => {
+            const highlightStat = section.highlightStat;
+            const highlightMain = highlightStat?.main;
+            const highlightMainSuffix =
+              highlightStat?.mainSuffix ??
+              highlightStat?.suffix ??
+              "";
+
+            return (
+              <div key={section.title}>
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                  <div>
+                    <h3 className="text-2xl font-semibold">{section.title}</h3>
+                    <p className="mt-2 text-sm text-slate-300">
+                      {section.description}
                   </p>
                 </div>
               </div>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {section.highlightStat ? (
+                {highlightStat ? (
                   <motion.article
-                    key={section.highlightStat.label}
+                    key={highlightStat.label}
                     initial={{ opacity: 0, y: 24 }}
                     animate={
                       inView
@@ -226,28 +234,22 @@ export default function StatsCounter() {
                     className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-white/20 bg-white/10 p-8 shadow-[0_25px_45px_-20px_rgba(15,23,42,0.8)]"
                   >
                     <div className="text-4xl md:text-5xl font-bold">
-                      <Counter to={section.highlightStat.value} run={inView} />
-                      {section.highlightStat.suffix}
-                      {typeof section.highlightStat.main === "number" && (
+                      <Counter to={highlightStat.value} run={inView} />
+                      {highlightStat.suffix}
+                      {typeof highlightMain === "number" && (
                         <span className="ml-2 align-baseline text-2xl font-semibold text-slate-300">
                           (
-                          <Counter
-                            to={section.highlightStat.main}
-                            run={inView}
-                          />
-                          {section.highlightStat.mainSuffix ??
-                            section.highlightStat.suffix ??
-                            ""}
-                          )
+                          <Counter to={highlightMain} run={inView} />
+                          {highlightMainSuffix})
                         </span>
                       )}
                     </div>
                     <div className="mt-2 text-base font-semibold text-slate-100">
-                      {section.highlightStat.label}
+                      {highlightStat.label}
                     </div>
-                    {section.highlightStat.helper ? (
+                    {highlightStat.helper ? (
                       <p className="mt-3 text-sm text-slate-300">
-                        {section.highlightStat.helper}
+                        {highlightStat.helper}
                       </p>
                     ) : null}
                   </motion.article>
@@ -311,7 +313,8 @@ export default function StatsCounter() {
                 </div>
               ) : null}
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
