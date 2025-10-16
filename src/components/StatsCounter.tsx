@@ -176,18 +176,19 @@ export default function StatsCounter() {
     <section
       ref={sectionRef}
       id="stats"
-      className="relative py-24 bg-slate-950 text-white overflow-hidden"
+      className="relative py-24 bg-white text-slate-900 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-950 to-slate-900/80" />
+      {/* 배경 그라데이션: 밝은 인디고-스카이 톤 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-sky-50" />
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+          <p className="text-sm uppercase tracking-[0.3em] text-indigo-700">
             since 1989 Performance
           </p>
-          <h2 className="mt-4 text-3xl md:text-4xl font-semibold">
-            숫자로 증명하는 모다고 합격 파워
+          <h2 className="mt-4 text-3xl md:text-4xl font-semibold text-slate-900">
+            숫자로 증명하는 모다고
           </h2>
-          <p className="mt-4 text-base text-slate-300">
+          <p className="mt-4 text-base text-slate-600">
             방대한 합격자 명단 중 핵심 수치만 선별해 한눈에 확인할 수 있도록
             재구성했습니다.
           </p>
@@ -204,8 +205,10 @@ export default function StatsCounter() {
               <div key={section.title}>
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                   <div>
-                    <h3 className="text-2xl font-semibold">{section.title}</h3>
-                    <p className="mt-2 text-sm text-slate-300">
+                    <h3 className="text-2xl font-semibold text-slate-900">
+                      {section.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600">
                       {section.description}
                     </p>
                   </div>
@@ -229,24 +232,24 @@ export default function StatsCounter() {
                             }
                           : { opacity: 0, y: 24 }
                       }
-                      className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-white/20 bg-white/10 p-8 shadow-[0_25px_45px_-20px_rgba(15,23,42,0.8)]"
+                      className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-indigo-100 bg-white p-8 shadow-[0_15px_30px_-10px_rgba(15,23,42,0.1)]"
                     >
-                      <div className="text-4xl md:text-5xl font-bold">
+                      <div className="text-4xl md:text-5xl font-bold text-slate-900">
                         <Counter to={highlightStat.value} run={inView} />
                         {highlightStat.suffix}
                         {typeof highlightMain === "number" && (
-                          <span className="ml-2 align-baseline text-2xl font-semibold text-slate-300">
+                          <span className="ml-2 align-baseline text-2xl font-semibold text-slate-500">
                             (
                             <Counter to={highlightMain} run={inView} />
                             {highlightMainSuffix})
                           </span>
                         )}
                       </div>
-                      <div className="mt-2 text-base font-semibold text-slate-100">
+                      <div className="mt-2 text-base font-semibold text-indigo-800">
                         {highlightStat.label}
                       </div>
                       {highlightStat.helper ? (
-                        <p className="mt-3 text-sm text-slate-300">
+                        <p className="mt-3 text-sm text-slate-500">
                           {highlightStat.helper}
                         </p>
                       ) : null}
@@ -277,24 +280,24 @@ export default function StatsCounter() {
                               }
                             : { opacity: 0, y: 24 }
                         }
-                        className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_15px_35px_-15px_rgba(15,23,42,0.6)]"
+                        className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_20px_-10px_rgba(15,23,42,0.08)]"
                       >
-                        <div className="text-3xl font-bold">
+                        <div className="text-3xl font-bold text-slate-900">
                           <Counter to={stat.value} run={inView} />
                           {stat.suffix}
                           {typeof stat.main === "number" && (
-                            <span className="ml-1 align-baseline text-xl font-semibold text-slate-300">
+                            <span className="ml-1 align-baseline text-xl font-semibold text-slate-500">
                               (
                               <Counter to={stat.main} run={inView} />
                               {stat.mainSuffix ?? stat.suffix ?? ""})
                             </span>
                           )}
                         </div>
-                        <div className="mt-1 text-sm font-medium text-slate-100">
+                        <div className="mt-1 text-sm font-medium text-indigo-800">
                           {stat.label}
                         </div>
                         {stat.helper ? (
-                          <p className="mt-2 text-xs text-slate-400">
+                          <p className="mt-2 text-xs text-slate-500">
                             {stat.helper}
                           </p>
                         ) : null}
@@ -306,7 +309,7 @@ export default function StatsCounter() {
                     <button
                       type="button"
                       onClick={() => showMore(sectionIndex)}
-                      className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm font-medium text-slate-100"
+                      className="px-4 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 transition text-sm font-medium text-white shadow-sm"
                     >
                       더보기
                     </button>
