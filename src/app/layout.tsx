@@ -5,7 +5,7 @@ import "./globals.css";
 
 const siteName = "모다고 미술학원";
 const siteUrl = "https://modago.me";
-const siteTitle = "미대학원 준비의 모든 것 | 모다고";
+const siteTitle = "미대입시 준비의 모든 것 | 모다고";
 const siteDesc =
   "미대학원(국내·해외) 포트폴리오, 실기·면접 대비, 합격 사례까지 한 번에. 개인 맞춤 커리큘럼으로 합격 가능성을 높여보세요.";
 

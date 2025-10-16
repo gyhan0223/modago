@@ -251,12 +251,12 @@ export default function Home() {
       <StatsCounter />
 
       {/* Signature Highlights */}
-      <section className="bg-gray-50 py-28">
+      <section className="bg-white py-28">
         <div className="max-w-screen-xl mx-auto px-6 md:px-10">
           <div className="grid grid-cols-1 items-center gap-12">
             {/* Left: Big headline */}
             <motion.div {...fadeUp} className="lg:col-span-5">
-              <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-slate-400">
+              <p className="text-xs md:text-sm uppercase tracking-[0.25em] text-indigo-700">
                 modago difference
               </p>
               <h2 className="mt-4 text-5xl md:text-6xl font-semibold leading-[1.08] tracking-[-0.01em] text-slate-900">
@@ -264,164 +264,168 @@ export default function Home() {
                 <br className="hidden md:block" />
                 다른 이유
               </h2>
-              <p className="mt-6 text-lg leading-relaxed text-slate-600 max-w-prose">
+              <p className="mt-6 text-lg leading-relaxed text-slate-700 max-w-prose">
                 수많은 합격 사례를 넘어, 학습 경험 자체를 바꾸는 시스템으로
                 학생의 가능성을 입증합니다.
               </p>
             </motion.div>
 
-            {/* Right: Visual/Highlights grid (asymmetric like Toss) */}
+            {/* Right: Visual/Highlights grid */}
             <motion.ul
               {...fadeUp}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="lg:col-span-7 flex flex-col gap-6"
             >
               {[
-                { title: "실기 + 학과", desc: "", layout: "" },
-                {
-                  title: "개인 맞춤 커리큘럼",
-                  desc: "",
-                  layout: "",
-                },
-                {
-                  title: "상위권 대학",
-                  desc: "",
-                  layout: "",
-                },
-                {
-                  title: "미술활동보고서",
-                  desc: "",
-                  layout: "",
-                },
+                { title: "실기 + 학과" },
+                { title: "개인 맞춤 커리큘럼" },
+                { title: "상위권 대학" },
+                { title: "미술활동보고서" },
               ].map((point, idx) =>
                 idx === 0 ? (
-                  // --- 1) 첫 번째 카드: 다크 히어로 카드 ---
+                  // 1️⃣ 첫 번째 카드
                   <li
                     key="hero-card-1"
-                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-900 text-white p-8 md:p-12 shadow-lg"
+                    className="relative overflow-hidden rounded-3xl ring-1 ring-indigo-100 bg-white text-slate-900 p-8 md:p-12 shadow-md"
                   >
-                    <div className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
-                    <div className="pointer-events-none absolute -bottom-20 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
+                    <div className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full bg-indigo-100 blur-2xl opacity-40" />
+                    <div className="pointer-events-none absolute -bottom-20 -right-24 h-72 w-72 rounded-full bg-sky-100 blur-2xl opacity-30" />
 
                     <div className="relative z-10">
-                      <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50">
+                      <p className="text-xs md:text-sm uppercase tracking-wide text-indigo-700">
                         실기 + 학과
                       </p>
                       <h3 className="mt-4 text-2xl md:text-3xl font-semibold leading-snug">
                         모다고는 솔직하게 말씀드리겠습니다.
                       </h3>
-                      <p className="mt-5 text-base md:text-lg leading-relaxed text-white/90">
+                      <p className="mt-5 text-base md:text-lg leading-relaxed text-slate-700">
                         실기만 연습해서는 좋은 대학에 가기 어렵습니다.
                         <br />
                         학업도 병행해야 하는 게 현실입니다.
                         <br />
                         모다고에서는{" "}
-                        <span className="font-semibold">학과 수업</span>을 통해{" "}
-                        <span className="font-semibold">학업, 실기 모두</span>를
-                        잡아줍니다.
+                        <span className="font-semibold text-slate-900">
+                          학과 수업
+                        </span>
+                        을 통해{" "}
+                        <span className="font-semibold text-slate-900">
+                          학업·실기 모두
+                        </span>
+                        를 잡아줍니다.
                       </p>
                     </div>
                   </li>
                 ) : idx === 1 ? (
-                  // --- 2) 두 번째 카드: 다크 히어로 카드 ---
+                  // 2️⃣ 두 번째 카드
                   <li
                     key="hero-card-2"
-                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-950 text-white p-8 md:p-12 shadow-lg"
+                    className="relative overflow-hidden rounded-3xl ring-1 ring-indigo-100 bg-white text-slate-900 p-8 md:p-12 shadow-md"
                   >
-                    <div className="pointer-events-none absolute -top-14 -right-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
-                    <div className="pointer-events-none absolute -bottom-20 -left-24 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
+                    <div className="pointer-events-none absolute -top-14 -right-16 h-56 w-56 rounded-full bg-indigo-100 blur-2xl opacity-35" />
+                    <div className="pointer-events-none absolute -bottom-20 -left-24 h-72 w-72 rounded-full bg-sky-100 blur-2xl opacity-30" />
 
                     <div className="relative z-10">
-                      <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50">
+                      <p className="text-xs md:text-sm uppercase tracking-wide text-indigo-700">
                         개인 맞춤 커리큘럼
                       </p>
                       <h3 className="mt-4 text-2xl md:text-3xl font-semibold leading-snug">
                         시작점은 다르지만, 수업은 개개인에게 딱 맞게.
                       </h3>
-                      <p className="mt-5 text-base md:text-lg leading-relaxed text-white/90">
+                      <p className="mt-5 text-base md:text-lg leading-relaxed text-slate-700">
                         모다고에 오는 모든 학생의 시작점은 다 다릅니다.
                         <br />
                         하지만 개개인에 맞춘 커리큘럼을 진행하는 학원은 많지
                         않습니다.
                         <br />
                         모다고는{" "}
-                        <span className="font-semibold">소수 정예</span>로
-                        수업을 진행하기 때문에 가능합니다.
+                        <span className="font-semibold text-slate-900">
+                          소수 정예
+                        </span>
+                        로 수업을 진행하기 때문에 가능합니다.
                         <br />
-                        <span className="font-semibold">
+                        <span className="font-semibold text-slate-900">
                           개인별 최적의 커리큘럼
                         </span>
                         으로{" "}
-                        <span className="font-semibold">상위권 대학 합격</span>
-                        을 약속드립니다.
+                        <span className="font-semibold text-slate-900">
+                          상위권 대학 합격
+                        </span>
+                        을 지원합니다.
                       </p>
                     </div>
                   </li>
                 ) : idx === 2 ? (
-                  // --- 3) 세 번째 카드: 다크 히어로 카드 (문구 다듬음) ---
+                  // 3️⃣ 세 번째 카드
                   <li
                     key="hero-card-3"
-                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-900 text-white p-8 md:p-12 shadow-lg"
+                    className="relative overflow-hidden rounded-3xl ring-1 ring-indigo-100 bg-white text-slate-900 p-8 md:p-12 shadow-md"
                   >
-                    {/* 하이라이트 방향을 또 바꿔 리듬감 주기 */}
-                    <div className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
-                    <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
+                    <div className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full bg-indigo-100 blur-2xl opacity-40" />
+                    <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-sky-100 blur-2xl opacity-30" />
 
                     <div className="relative z-10">
-                      <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50">
+                      <p className="text-xs md:text-sm uppercase tracking-wide text-indigo-700">
                         상위권 대학 집중
                       </p>
                       <h3 className="mt-4 text-2xl md:text-3xl font-semibold leading-snug">
                         평균 등급이 낮아도, 끝까지 끌어올립니다.
                       </h3>
-                      <p className="mt-5 text-base md:text-lg leading-relaxed text-white/90">
+                      <p className="mt-5 text-base md:text-lg leading-relaxed text-slate-700">
                         모다고의 모든 수업은 상위권 대학 기준으로 설계합니다.
                         <br />
                         ‘따라갈 수 있을까’ 걱정돼도 괜찮습니다.
                         <br />
                         오전부터 밤까지 이어지는{" "}
-                        <span className="font-semibold">
+                        <span className="font-semibold text-slate-900">
                           자습 · 클리닉
-                        </span>,{" "}
-                        <span className="font-semibold">담임제 케어</span>로 단
-                        한 명도 뒤처지지 않게 합니다.
+                        </span>
+                        ,{" "}
+                        <span className="font-semibold text-slate-900">
+                          담임제 케어
+                        </span>
+                        로 단 한 명도 뒤처지지 않게 합니다.
                         <br />
-                        <span className="font-semibold">주요 합격 사례</span>가
-                        그 사실을 증명합니다.
+                        <span className="font-semibold text-slate-900">
+                          주요 합격 사례
+                        </span>
+                        가 그 사실을 증명합니다.
                       </p>
                     </div>
                   </li>
                 ) : (
-                  // --- 4) 나머지 카드: 기존 화이트 카드 유지 ---
+                  // 4️⃣ 네 번째 카드
                   <li
                     key="hero-card-4"
-                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-950 text-white p-8 md:p-12 shadow-lg"
+                    className="relative overflow-hidden rounded-3xl ring-1 ring-indigo-100 bg-white text-slate-900 p-8 md:p-12 shadow-md"
                   >
-                    <div className="pointer-events-none absolute -top-16 -right-20 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
-                    <div className="pointer-events-none absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
+                    <div className="pointer-events-none absolute -top-16 -right-20 h-56 w-56 rounded-full bg-indigo-100 blur-2xl opacity-35" />
+                    <div className="pointer-events-none absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-sky-100 blur-2xl opacity-25" />
 
                     <div className="relative z-10">
-                      <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50">
+                      <p className="text-xs md:text-sm uppercase tracking-wide text-indigo-700">
                         주입식 교육 X
                       </p>
                       <h3 className="mt-4 text-2xl md:text-3xl font-semibold leading-snug">
                         생각을 그리는 힘, 상상력 수업으로 만듭니다.
                       </h3>
-                      <p className="mt-5 text-base md:text-lg leading-relaxed text-white/90">
+                      <p className="mt-5 text-base md:text-lg leading-relaxed text-slate-700">
                         모다고는 정답을 외우는 수업이 아닙니다.
                         <br />
                         관찰과 발상, 그리고 시각적 사고를 중심으로{" "}
-                        <span className="font-semibold">
+                        <span className="font-semibold text-slate-900">
                           ‘표현의 이유’를 스스로 설계
                         </span>
                         하도록 지도합니다.
                         <br />
                         상상력을 자극하는{" "}
-                        <span className="font-semibold">
+                        <span className="font-semibold text-slate-900">
                           프로젝트형 수업
-                        </span>과{" "}
-                        <span className="font-semibold">비판적 크리틱</span>을
-                        통해 학생 스스로 사고하고 표현하는 힘을 기릅니다.
+                        </span>
+                        과{" "}
+                        <span className="font-semibold text-slate-900">
+                          비판적 크리틱
+                        </span>
+                        을 통해 학생 스스로 사고하고 표현하는 힘을 기릅니다.
                       </p>
                     </div>
                   </li>
