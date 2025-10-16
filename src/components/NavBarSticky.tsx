@@ -183,6 +183,7 @@ export default function NavBarSticky() {
   const resultsItems: MenuItem[] = [
     { label: "2025년 합격결과", href: "/results/2025" },
     { label: "2024년 합격결과", href: "/results/2024" },
+    { label: "2010-2019 합격 아카이브", href: "/results/2010-2019" },
   ];
   const galleryItems: MenuItem[] = galleryTabs.map((tab) => ({
     label: tab.label,
