@@ -280,17 +280,17 @@ export default function Home() {
                 { title: "실기 + 학과", desc: "", layout: "" },
                 {
                   title: "개인 맞춤 커리큘럼",
-                  desc: "진단/목표/시간을 수치화해 주차별 스프린트에 ‘딱 필요한 과제’만 배치합니다.",
+                  desc: "",
                   layout: "",
                 },
                 {
                   title: "상위권 대학",
-                  desc: "출제경향 DB와 블라인드 모의실기로 심사 기준을 일관되게 충족하도록 점검합니다.",
+                  desc: "",
                   layout: "",
                 },
                 {
                   title: "미술활동보고서",
-                  desc: "STAR/PEEL로 과정 증빙을 구조화하고 금지 표현/리스크를 사전 차단합니다.",
+                  desc: "",
                   layout: "",
                 },
               ].map((point, idx) =>
@@ -394,23 +394,35 @@ export default function Home() {
                 ) : (
                   // --- 4) 나머지 카드: 기존 화이트 카드 유지 ---
                   <li
-                    key={point.title}
-                    className="group relative overflow-hidden rounded-3xl ring-1 ring-gray-200 bg-white p-7 shadow-sm transition will-change-transform hover:-translate-y-1.5 hover:shadow-lg"
+                    key="hero-card-4"
+                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-950 text-white p-8 md:p-12 shadow-lg"
                   >
-                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-brand/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-                    <div className="relative z-10 flex items-start gap-3">
-                      <CheckCircle2
-                        className="mt-0.5 h-5 w-5 shrink-0 text-slate-900"
-                        aria-hidden
-                      />
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900">
-                          {point.title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                          {point.desc}
-                        </p>
-                      </div>
+                    <div className="pointer-events-none absolute -top-16 -right-20 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
+                    <div className="pointer-events-none absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
+
+                    <div className="relative z-10">
+                      <p className="text-xs md:text-sm uppercase tracking-[0.35em] text-white/50">
+                        주입식 교육 X
+                      </p>
+                      <h3 className="mt-4 text-2xl md:text-3xl font-semibold leading-snug">
+                        생각을 그리는 힘, 상상력 수업으로 만듭니다.
+                      </h3>
+                      <p className="mt-5 text-base md:text-lg leading-relaxed text-white/90">
+                        모다고는 정답을 외우는 수업이 아닙니다.
+                        <br />
+                        관찰과 발상, 그리고 시각적 사고를 중심으로{" "}
+                        <span className="font-semibold">
+                          ‘표현의 이유’를 스스로 설계
+                        </span>
+                        하도록 지도합니다.
+                        <br />
+                        상상력을 자극하는{" "}
+                        <span className="font-semibold">
+                          프로젝트형 수업
+                        </span>과{" "}
+                        <span className="font-semibold">비판적 크리틱</span>을
+                        통해 학생 스스로 사고하고 표현하는 힘을 기릅니다.
+                      </p>
                     </div>
                   </li>
                 )
