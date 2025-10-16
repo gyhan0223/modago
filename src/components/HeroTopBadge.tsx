@@ -10,7 +10,7 @@ export default function HeroTopBadge() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
-        className="text-xl text-2xl text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+        className="text-xl md:text-2xl font-medium text-brand-light drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
       >
         “쉽게 길들여지지 않는 고양이들처럼”
       </motion.div>
@@ -20,7 +20,7 @@ export default function HeroTopBadge() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
-        className="mt-0 inline-flex items-center justify-center px-5 md:px-6 py-2 md:py-2.5 pointer-events-auto"
+        className="mt-0 inline-flex items-center justify-center rounded-full border border-brand/40 bg-white/10 px-5 md:px-6 py-2 md:py-2.5 text-white pointer-events-auto backdrop-blur"
       >
         <Image
           src="/logo.png"
@@ -35,7 +35,7 @@ export default function HeroTopBadge() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
-        className="text-xl text-2xl text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+        className="text-xl md:text-2xl font-medium text-brand-light drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
       >
         since 1989
       </motion.div>
@@ -44,7 +44,7 @@ export default function HeroTopBadge() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.8, ease: "easeOut" }}
-        className="text-xl text-2xl text-black drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+        className="text-xl md:text-2xl font-medium text-brand-light drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
       >
         모두다른고양이 입시미술학원
         <br />

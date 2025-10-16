@@ -158,8 +158,9 @@ export default function Home() {
       <div className="relative overflow-hidden">
         <section className="relative min-h-[100vh] flex flex-col items-center justify-center px-6">
           <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,217,191,0.45)_0%,_rgba(255,255,255,0)_55%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(120deg,_rgba(0,0,0,0.55)_0%,_rgba(0,0,0,0.25)_45%,_rgba(0,0,0,0)_80%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,217,191,0.55)_0%,_rgba(255,255,255,0)_65%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(165deg,_rgba(245,136,70,0.58)_0%,_rgba(221,116,52,0.45)_40%,_rgba(15,23,42,0.75)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(120deg,_rgba(8,8,8,0.72)_0%,_rgba(8,8,8,0.4)_35%,_rgba(8,8,8,0)_75%)]" />
             <div
               className="absolute inset-0 bg-cover bg-center opacity-80"
               style={{ backgroundImage: "url('/hero.png')" }}
@@ -180,14 +181,43 @@ export default function Home() {
               initial={{ opacity: 0, y: 48 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
-              className="mt-6 text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05]"
-            />
+              className="mt-6 text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] drop-shadow-[0_12px_32px_rgba(12,12,12,0.3)]"
+            >
+              37년 신뢰로 완성하는
+              <br className="hidden md:block" />
+              당신만의 합격 포트폴리오
+            </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-              className="mt-8 max-w-2xl text-lg md:text-xl text-white/80"
-            />
+              className="mt-8 max-w-2xl text-lg md:text-xl text-white/85"
+            >
+              수천 건의 합격 데이터를 바탕으로 개인 맞춤 로드맵을 설계하고, 전임
+              강사진이 처음부터 끝까지 동행합니다. 믿을 수 있는 기록과 투명한
+              피드백으로 학부모와 학생 모두가 안심하고 맡길 수 있는 입시 파트너가
+              되어드립니다.
+            </motion.p>
+            <motion.ul
+              initial={{ opacity: 0, y: 36 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.5, ease: "easeOut" }}
+              className="mt-10 grid gap-4 sm:grid-cols-2"
+            >
+              {["학원법 준수·정기 감사 완료", "2024년 학부모 만족도 96%", "합격자 실명 인증 공개", "담임제 책임 관리 및 주간 리포트"].map(
+                (trustPoint) => (
+                  <li
+                    key={trustPoint}
+                    className="group flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-medium text-white/90 backdrop-blur-md transition hover:border-brand hover:bg-brand/10"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-brand">
+                      <CheckCircle2 className="h-5 w-5" aria-hidden />
+                    </span>
+                    <span>{trustPoint}</span>
+                  </li>
+                )
+              )}
+            </motion.ul>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -219,7 +249,7 @@ export default function Home() {
       {/* Brand Message */}
       <section
         id="after-hero"
-        className="relative z-10 border-y border-gray-100 bg-white py-20"
+        className="relative z-10 border-y border-brand/15 bg-gradient-to-b from-white via-brand/5 to-white py-20"
       >
         <div className="max-w-5xl mx-auto px-6 text-center">
           <motion.h2
@@ -227,23 +257,19 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-5xl font-semibold leading-tight text-gray-900"
           >
-            누구나, 지금 수준에서 시작할 수 있는 미술 교육
+            신뢰로 검증된 1:1 맞춤 미술 교육
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 text-lg md:text-xl text-gray-600"
+            className="mt-6 text-lg md:text-xl text-gray-700"
           >
-            시작점은 모두 다릅니다.
-            <br />
-            <br />
-            처음 시작하는 학생부터 이미 준비 중인 학생까지
-            <br />
-            개인의 실기 수준과 목표에 맞춰 1:1 맞춤형 커리큘럼으로 지도합니다.
-            <br />
-            부담 없이 시작하고, 꾸준히 성장할 수 있도록 함께합니다.
+            시작점은 모두 다릅니다. 하지만 모다고는 각 학생의 목표와 현재 수준을
+            세밀히 진단한 뒤 개인별 커리큘럼을 설계합니다. 투명한 진행 상황 공유와
+            매월 학부모 미팅을 통해 학습 여정 전체가 한눈에 보이도록 관리합니다.
+            학생과 학부모가 모두 신뢰할 수 있는 파트너로서 꾸준한 성장을 지원합니다.
           </motion.p>
         </div>
       </section>
@@ -251,7 +277,7 @@ export default function Home() {
       <StatsCounter />
 
       {/* Signature Highlights */}
-      <section className="bg-gray-50 py-28">
+      <section className="bg-gradient-to-br from-white via-brand/10 to-gray-50 py-28">
         <div className="max-w-screen-xl mx-auto px-6 md:px-10">
           <div className="grid grid-cols-1 items-center gap-12">
             {/* Left: Big headline */}
@@ -260,9 +286,9 @@ export default function Home() {
                 modago difference
               </p>
               <h2 className="mt-4 text-5xl md:text-6xl font-semibold leading-[1.08] tracking-[-0.01em] text-slate-900">
-                모다고가 다른 학원과
+                신뢰를 쌓아온 모다고의
                 <br className="hidden md:block" />
-                다른 이유
+                차별화된 시스템
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-slate-600 max-w-prose">
                 수많은 합격 사례를 넘어, 학습 경험 자체를 바꾸는 시스템으로
@@ -298,7 +324,7 @@ export default function Home() {
                   // --- 1) 첫 번째 카드: 다크 히어로 카드 ---
                   <li
                     key="hero-card-1"
-                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-900 text-white p-8 md:p-12 shadow-lg"
+                    className="relative overflow-hidden rounded-3xl border border-brand/30 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white p-8 md:p-12 shadow-lg"
                   >
                     <div className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
                     <div className="pointer-events-none absolute -bottom-20 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
@@ -326,7 +352,7 @@ export default function Home() {
                   // --- 2) 두 번째 카드: 다크 히어로 카드 ---
                   <li
                     key="hero-card-2"
-                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-950 text-white p-8 md:p-12 shadow-lg"
+                    className="relative overflow-hidden rounded-3xl border border-brand/30 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white p-8 md:p-12 shadow-lg"
                   >
                     <div className="pointer-events-none absolute -top-14 -right-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
                     <div className="pointer-events-none absolute -bottom-20 -left-24 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />
@@ -361,7 +387,7 @@ export default function Home() {
                   // --- 3) 세 번째 카드: 다크 히어로 카드 (문구 다듬음) ---
                   <li
                     key="hero-card-3"
-                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-900 text-white p-8 md:p-12 shadow-lg"
+                    className="relative overflow-hidden rounded-3xl border border-brand/30 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white p-8 md:p-12 shadow-lg"
                   >
                     {/* 하이라이트 방향을 또 바꿔 리듬감 주기 */}
                     <div className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
@@ -395,7 +421,7 @@ export default function Home() {
                   // --- 4) 나머지 카드: 기존 화이트 카드 유지 ---
                   <li
                     key="hero-card-4"
-                    className="relative overflow-hidden rounded-3xl ring-1 ring-slate-800 bg-slate-950 text-white p-8 md:p-12 shadow-lg"
+                    className="relative overflow-hidden rounded-3xl border border-brand/30 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white p-8 md:p-12 shadow-lg"
                   >
                     <div className="pointer-events-none absolute -top-16 -right-20 h-56 w-56 rounded-full bg-brand/30 blur-3xl opacity-40" />
                     <div className="pointer-events-none absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-white/10 blur-3xl opacity-30" />

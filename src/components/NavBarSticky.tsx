@@ -203,7 +203,7 @@ export default function NavBarSticky() {
           "transition-all duration-300",
           "backdrop-blur-md",
           pinned
-            ? "bg-white/85 shadow-sm border-b border-black/5"
+            ? "bg-white/90 shadow-[0_20px_45px_-25px_rgba(245,136,70,0.65)] border-b border-brand/20"
             : "bg-white/60 supports-[backdrop-filter]:bg-white/50",
         ].join(" ")}
       >

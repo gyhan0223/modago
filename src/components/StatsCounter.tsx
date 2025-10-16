@@ -178,7 +178,8 @@ export default function StatsCounter() {
       id="stats"
       className="relative py-24 bg-slate-950 text-white overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-950 to-slate-900/80" />
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900/90 to-slate-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(245,136,70,0.25)_0%,_rgba(12,19,33,0.85)_55%,_rgba(12,19,33,0.95)_100%)]" />
       <div className="relative max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
@@ -229,7 +230,7 @@ export default function StatsCounter() {
                             }
                           : { opacity: 0, y: 24 }
                       }
-                      className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-white/20 bg-white/10 p-8 shadow-[0_25px_45px_-20px_rgba(15,23,42,0.8)]"
+                      className="sm:col-span-2 lg:col-span-3 rounded-3xl border border-brand/35 bg-gradient-to-br from-white/20 via-brand/20 to-white/10 p-8 shadow-[0_25px_45px_-20px_rgba(15,23,42,0.8)] backdrop-blur"
                     >
                       <div className="text-4xl md:text-5xl font-bold">
                         <Counter to={highlightStat.value} run={inView} />
@@ -277,7 +278,7 @@ export default function StatsCounter() {
                               }
                             : { opacity: 0, y: 24 }
                         }
-                        className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_15px_35px_-15px_rgba(15,23,42,0.6)]"
+                        className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_15px_35px_-15px_rgba(15,23,42,0.6)] transition hover:border-brand/35 hover:bg-brand/10"
                       >
                         <div className="text-3xl font-bold">
                           <Counter to={stat.value} run={inView} />
@@ -306,7 +307,7 @@ export default function StatsCounter() {
                     <button
                       type="button"
                       onClick={() => showMore(sectionIndex)}
-                      className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm font-medium text-slate-100"
+                      className="px-5 py-2 rounded-full bg-brand text-slate-950 transition hover:bg-brand-dark text-sm font-semibold shadow-lg shadow-brand/20"
                     >
                       더보기
                     </button>
