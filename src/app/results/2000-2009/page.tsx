@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import NavBarSticky from "@/components/NavBarSticky";
+import { LEGACY_RESULTS_1990S } from "@/data/results1990s";
 import { LEGACY_RESULTS_2000S } from "@/data/results2000s";
 
 export const metadata: Metadata = {
@@ -8,8 +9,13 @@ export const metadata: Metadata = {
     "2000년부터 2009년까지 모두다른고양이 입시미술학원의 합격 실적을 한 페이지에서 확인하세요.",
 };
 
+const COMBINED_RESULTS = [
+  ...LEGACY_RESULTS_1990S,
+  ...LEGACY_RESULTS_2000S,
+] as const;
+
 export default function Results2000sPage() {
-  const totalAccepted = LEGACY_RESULTS_2000S.reduce(
+  const totalAccepted = COMBINED_RESULTS.reduce(
     (sum, entry) => sum + entry.totalAccepted,
     0
   );
@@ -33,7 +39,7 @@ export default function Results2000sPage() {
             정리했습니다.
           </p>
           <p className="mt-5 text-xs font-medium uppercase tracking-[0.25em] text-amber-600">
-            누적 합격 {totalAccepted.toLocaleString()}명
+            1990~2009 누적 합격 {totalAccepted.toLocaleString()}명
           </p>
         </div>
       </header>
