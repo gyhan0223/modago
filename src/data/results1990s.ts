@@ -2965,6 +2965,7 @@ export const LEGACY_RESULTS_1990S: readonly LegacyResults1990Entry[] = [
 
 광고디자인 오 민 합격`,
   },
+
   {
     year: "1991",
     totalAccepted: 22,
@@ -3069,5 +3070,10 @@ export const LEGACY_RESULTS_1990S: readonly LegacyResults1990Entry[] = [
 장안대학교 최종합격 1명
 
 산업디자인 김민정 합격`,
+  },
+  {
+    year: "1989~1990",
+    totalAccepted: 500,
+    content: ``,
   },
 ];
