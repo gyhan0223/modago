@@ -56,6 +56,13 @@ export default async function ResultsYearPage({ params }: PageProps) {
   }
 
   const yearData = RESULTS_BY_YEAR[year];
+  const cumulativeAccepted = Object.entries(RESULTS_BY_YEAR).reduce(
+    (total, [resultYear, data]) =>
+      Number(resultYear) <= Number(year)
+        ? total + data.totalAccepted
+        : total,
+    0,
+  );
   const topUniversities = [...yearData.universities]
     .sort((a, b) => b.accepted - a.accepted)
     .slice(0, 3);
@@ -84,6 +91,9 @@ export default async function ResultsYearPage({ params }: PageProps) {
           </p>
           <p className="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-amber-600">
             {yearData.universities.length}개 대학 집계
+          </p>
+          <p className="mt-1 text-sm font-semibold text-amber-700">
+            {year}학년도까지 누적 합격자 {cumulativeAccepted.toLocaleString()}명
           </p>
         </div>
       </header>
