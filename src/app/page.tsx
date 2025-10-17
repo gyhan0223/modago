@@ -736,19 +736,9 @@ export default function Home() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {[
               {
-                name: "김모다",
-                role: "원장 · 회화",
-                bio: "홍익대 회화과 졸업. 국내외 15회 개인전 및 다수 단체전 참여, 입시 지도 20년 경력.",
-              },
-              {
-                name: "이도영",
-                role: "조형 · 디자인",
-                bio: "국민대 시각디자인과 졸업. 브랜드 디자인 프로젝트 다수 진행, 유학 포트폴리오 전문.",
-              },
-              {
-                name: "박하늘",
-                role: "미디어아트",
-                bio: "서울대 융합예술대학원 출신. 인터랙티브 아트 작가로 활동, 영상/뉴미디어 실기 담당.",
+                name: "한동희",
+                role: "원장",
+                bio: "홍익대 디자인과 졸업. 입시 지도 37년 경력.",
               },
             ].map((teacher, idx) => (
               <motion.article
