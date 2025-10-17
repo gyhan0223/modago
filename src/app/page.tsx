@@ -2,7 +2,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
 import NavBarSticky from "@/components/NavBarSticky";
 import HeroTopBadge from "@/components/HeroTopBadge";
 import HeroScrollArrow from "@/components/HeroScrollArrow";
@@ -51,6 +50,22 @@ export default function Home() {
   const [loadedSlides, setLoadedSlides] = useState<boolean[]>(() =>
     STUDIO_SLIDES.map(() => false)
   );
+  const [showPopup, setShowPopup] = useState(true);
+
+  useEffect(() => {
+    if (!showPopup) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowPopup(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showPopup]);
 
   const loadedIndicesRef = useRef(new Set<number>());
   const preloadingRef = useRef(new Set<number>());
@@ -154,6 +169,35 @@ export default function Home() {
 
   return (
     <main className="bg-white text-gray-900">
+      {showPopup && (
+        <div
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 p-6"
+          role="presentation"
+          onClick={() => setShowPopup(false)}
+        >
+          <div
+            className="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              aria-label="닫기"
+              onClick={() => setShowPopup(false)}
+              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/70 text-xl font-semibold text-white transition hover:bg-black"
+            >
+              ×
+            </button>
+            <Image
+              src="/popup.jpg"
+              alt="홍대 모두다른고양이 팝업 안내"
+              width={800}
+              height={800}
+              className="h-full w-full object-cover"
+              priority
+            />
+          </div>
+        </div>
+      )}
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <section className="relative min-h-[100vh] flex flex-col items-center justify-center px-6">
