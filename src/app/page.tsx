@@ -171,12 +171,12 @@ export default function Home() {
     <main className="bg-white text-gray-900">
       {showPopup && (
         <div
-          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 p-6"
+          className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/60 p-6 pt-t0"
           role="presentation"
           onClick={() => setShowPopup(false)}
         >
           <div
-            className="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl"
+            className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white shadow-2xl transform origin-center"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -188,10 +188,10 @@ export default function Home() {
               ×
             </button>
             <Image
-              src="/popup.jpg"
+              src="/popup.png"
               alt="홍대 모두다른고양이 팝업 안내"
-              width={800}
-              height={800}
+              width={600}
+              height={600}
               className="h-full w-full object-cover"
               priority
             />
