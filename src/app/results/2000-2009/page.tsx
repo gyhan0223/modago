@@ -35,11 +35,11 @@ export default function Results2000sPage() {
             2000-2009년 모두다른고양이 합격 기록
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg">
-            10년 동안 축적된 합격 소식을 한눈에 살펴보세요. 연도별 주요 대학과 합격자 이름을 원문 그대로
-            정리했습니다.
+            10년 동안 축적된 합격 소식을 한눈에 살펴보세요. 연도별 주요 대학과
+            합격자 이름을 원문 그대로 정리했습니다.
           </p>
           <p className="mt-5 text-xs font-medium uppercase tracking-[0.25em] text-amber-600">
-            1990~2009 누적 합격 {totalAccepted.toLocaleString()}명
+            누적 합격 {totalAccepted.toLocaleString()}명
           </p>
         </div>
       </header>
@@ -54,8 +54,8 @@ export default function Results2000sPage() {
             2000학년도부터 2009학년도까지, 원본 기록 그대로 모았습니다
           </h2>
           <p className="text-sm leading-relaxed text-gray-600 md:text-base">
-            각 연도별로 공개된 합격자 명단을 연대순으로 정리했습니다. 대학, 전공, 학교 정보가 포함된 당시
-            공지의 어조를 살려 전달합니다.
+            각 연도별로 공개된 합격자 명단을 연대순으로 정리했습니다. 대학,
+            전공, 학교 정보가 포함된 당시 공지의 어조를 살려 전달합니다.
           </p>
         </div>
       </section>
@@ -66,14 +66,19 @@ export default function Results2000sPage() {
             <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6">
               <div className="flex flex-col gap-4 rounded-3xl border border-gray-200 bg-gray-50 p-8 shadow-sm md:flex-row md:items-center md:justify-between">
                 <div>
-                  <h2 className="text-2xl font-semibold text-gray-900">{entry.year}학년도 합격 현황</h2>
+                  <h2 className="text-2xl font-semibold text-gray-900">
+                    {entry.year}학년도 합격 현황
+                  </h2>
                   <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                    당시 공지에 기재된 대학별 합격자와 전공 정보를 원문 그대로 정리했습니다.
+                    당시 공지에 기재된 대학별 합격자와 전공 정보를 원문 그대로
+                    정리했습니다.
                   </p>
                 </div>
                 <div className="grid gap-4 text-right text-sm">
                   <div>
-                    <span className="text-xs uppercase tracking-[0.3em] text-amber-500">총 합격자</span>
+                    <span className="text-xs uppercase tracking-[0.3em] text-amber-500">
+                      총 합격자
+                    </span>
                     <p className="mt-1 text-2xl font-semibold text-gray-900">
                       {entry.totalAccepted.toLocaleString()}명
                     </p>
@@ -93,7 +98,8 @@ export default function Results2000sPage() {
 
       <footer className="border-t border-gray-200 bg-white py-12">
         <div className="mx-auto max-w-5xl px-6 text-sm text-gray-500">
-          ※ 공개 자료를 기반으로 수집한 결과이며, 일부 항목은 당시 게시된 문구를 그대로 옮겼습니다.
+          ※ 공개 자료를 기반으로 수집한 결과이며, 일부 항목은 당시 게시된 문구를
+          그대로 옮겼습니다.
         </div>
       </footer>
     </main>

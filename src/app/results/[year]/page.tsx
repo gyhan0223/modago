@@ -102,8 +102,9 @@ export default async function ResultsYearPage({ params }: PageProps) {
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
             총 {yearData.totalAccepted.toLocaleString()}명의 합격 소식을
-            대학별로 정리했습니다. 실기와 포트폴리오, 컨설팅이 만들어 낸 결과를
-            함께 축하해 주세요.
+            대학별로 정리했습니다. <br />
+            하루의 대부분을 학원에서 보내며 실기와 학과 모두에 최선을 다한
+            학생들이 만들어 낸 결과입니다.
           </p>
           <p className="mt-3 text-xs font-medium uppercase tracking-[0.2em] text-amber-600">
             {yearData.universities.length}개 대학 집계
