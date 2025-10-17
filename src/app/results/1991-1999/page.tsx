@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import NavBarSticky from "@/components/NavBarSticky";
 import { LEGACY_RESULTS_1990S } from "@/data/results1990s";
 
@@ -21,6 +22,14 @@ export default function Results1990sPage() {
           className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_70%)]"
           aria-hidden
         />
+        <div className="absolute inset-x-0 top-8 flex justify-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full border border-sky-200/70 bg-white/80 px-4 py-2 text-sm font-medium text-sky-600 shadow-sm backdrop-blur transition hover:bg-white"
+          >
+            ← 홈으로 돌아가기
+          </Link>
+        </div>
         <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 pb-20 pt-32 text-center">
           <span className="rounded-full border border-sky-200/80 bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-sky-600 shadow-sm">
             합격 결과 아카이브

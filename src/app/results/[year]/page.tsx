@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import NavBarSticky from "@/components/NavBarSticky";
 import { RESULTS_BY_YEAR } from "@/data/results";
 import { LEGACY_RESULTS_1990S } from "@/data/results1990s";
@@ -47,6 +48,14 @@ export default async function ResultsYearPage({ params }: PageProps) {
   if (!assertValidYear(year)) {
     return (
       <main className="min-h-screen bg-gray-50 px-6 py-16 text-center text-gray-900">
+        <div className="mb-10 flex justify-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-200/70 bg-white px-4 py-2 text-sm font-medium text-amber-600 shadow-sm transition hover:bg-amber-50"
+          >
+            ← 홈으로 돌아가기
+          </Link>
+        </div>
         <div className="mx-auto max-w-2xl">
           <h1 className="text-3xl font-semibold">준비 중입니다</h1>
           <p className="mt-4 text-base text-gray-600">
@@ -93,6 +102,14 @@ export default async function ResultsYearPage({ params }: PageProps) {
           className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.22),_transparent_60%)]"
           aria-hidden
         />
+        <div className="absolute inset-x-0 top-8 flex justify-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-200/70 bg-white/80 px-4 py-2 text-sm font-medium text-amber-600 shadow-sm backdrop-blur transition hover:bg-white"
+          >
+            ← 홈으로 돌아가기
+          </Link>
+        </div>
         <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 pb-20 pt-32 text-center">
           <span className="rounded-full border border-amber-200/80 bg-white/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-600 shadow-sm">
             합격 결과
