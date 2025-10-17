@@ -73,11 +73,12 @@ export default async function ResultsYearPage({ params }: PageProps) {
     })),
   ];
 
-  const cumulativeAccepted = allResults.reduce(
-    (total, { year: resultYear, totalAccepted }) =>
-      Number(resultYear) <= Number(year) ? total + totalAccepted : total,
-    0,
-  );
+  const cumulativeAccepted =
+    allResults.reduce(
+      (total, { year: resultYear, totalAccepted }) =>
+        Number(resultYear) <= Number(year) ? total + totalAccepted : total,
+      0
+    ) + 500;
   const topUniversities = [...yearData.universities]
     .sort((a, b) => b.accepted - a.accepted)
     .slice(0, 3);
