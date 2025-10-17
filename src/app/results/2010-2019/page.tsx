@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import NavBarSticky from "@/components/NavBarSticky";
 import { RESULTS_BY_YEAR } from "@/data/results";
+import { LEGACY_RESULTS_1990S } from "@/data/results1990s";
+import { LEGACY_RESULTS_2000S } from "@/data/results2000s";
 
 const TARGET_YEARS = [
   "2019",
@@ -29,6 +31,11 @@ function collectYearEntries(): YearEntry[] {
   }, []);
 }
 
+const LEGACY_TOTAL_ACCEPTED = [...LEGACY_RESULTS_1990S, ...LEGACY_RESULTS_2000S].reduce(
+  (sum, entry) => sum + entry.totalAccepted,
+  0
+);
+
 export const metadata: Metadata = {
   title: "2010-2019년 합격 결과 모아보기 | 모두다른고양이 입시미술학원",
   description:
@@ -37,10 +44,11 @@ export const metadata: Metadata = {
 
 export default function Results2010sPage() {
   const yearEntries = collectYearEntries();
-  const totalAccepted = yearEntries.reduce(
+  const totalAccepted2010s = yearEntries.reduce(
     (sum, entry) => sum + entry.data.totalAccepted,
     0
   );
+  const totalAccepted = LEGACY_TOTAL_ACCEPTED + totalAccepted2010s;
 
   return (
     <main className="min-h-screen bg-white text-gray-900">
