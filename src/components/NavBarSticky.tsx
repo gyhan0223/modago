@@ -226,9 +226,9 @@ export default function NavBarSticky() {
             {/* 갤러리 드롭다운 */}
             <Dropdown label="갤러리" items={galleryItems} widthClass="w-48" />
             <li>
-              <a href="#program" className="hover:text-brand">
+              <Link href="/facilities" className="hover:text-brand">
                 시설 안내
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#program" className="hover:text-brand">
