@@ -51,7 +51,7 @@ export default async function ResultsYearPage({ params }: PageProps) {
         <div className="mb-10 flex justify-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-amber-200/70 bg-white px-4 py-2 text-sm font-medium text-amber-600 shadow-sm transition hover:bg-amber-50"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-200/70 bg-white px-4 py-2 text-sm font-medium text-amber-600 shadow-sm transition hover:bg-amber-50 z-50"
           >
             ← 홈으로 돌아가기
           </Link>
@@ -105,7 +105,7 @@ export default async function ResultsYearPage({ params }: PageProps) {
         <div className="absolute inset-x-0 top-8 flex justify-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-amber-200/70 bg-white/80 px-4 py-2 text-sm font-medium text-amber-600 shadow-sm backdrop-blur transition hover:bg-white"
+            className="inline-flex items-center gap-2 rounded-full border border-amber-200/70 bg-white/80 px-4 py-2 text-sm font-medium text-amber-600 shadow-sm backdrop-blur transition hover:bg-white z-50"
           >
             ← 홈으로 돌아가기
           </Link>
