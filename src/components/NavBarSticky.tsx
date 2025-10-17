@@ -189,7 +189,7 @@ export default function NavBarSticky() {
     { label: "2020년 합격결과", href: "/results/2020" },
     { label: "2010-2019 합격결과", href: "/results/2010-2019" },
     { label: "2000-2009 합격결과", href: "/results/2000-2009" },
-    { label: "1990-1999 합격결과", href: "/results/1990-1999" },
+    { label: "1991-1999 합격결과", href: "/results/1991-1999" },
   ];
   const galleryItems: MenuItem[] = galleryTabs.map((tab) => ({
     label: tab.label,
