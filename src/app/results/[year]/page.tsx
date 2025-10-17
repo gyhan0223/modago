@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import NavBarSticky from "@/components/NavBarSticky";
 import { RESULTS_BY_YEAR } from "@/data/results";
+import { LEGACY_RESULTS_1990S } from "@/data/results1990s";
+import { LEGACY_RESULTS_2000S } from "@/data/results2000s";
 
 const VALID_YEARS = Object.keys(
   RESULTS_BY_YEAR
@@ -56,11 +58,24 @@ export default async function ResultsYearPage({ params }: PageProps) {
   }
 
   const yearData = RESULTS_BY_YEAR[year];
-  const cumulativeAccepted = Object.entries(RESULTS_BY_YEAR).reduce(
-    (total, [resultYear, data]) =>
-      Number(resultYear) <= Number(year)
-        ? total + data.totalAccepted
-        : total,
+  const allResults = [
+    ...Object.entries(RESULTS_BY_YEAR).map(([resultYear, data]) => ({
+      year: resultYear,
+      totalAccepted: data.totalAccepted,
+    })),
+    ...LEGACY_RESULTS_1990S.map(({ year: legacyYear, totalAccepted }) => ({
+      year: legacyYear,
+      totalAccepted,
+    })),
+    ...LEGACY_RESULTS_2000S.map(({ year: legacyYear, totalAccepted }) => ({
+      year: legacyYear,
+      totalAccepted,
+    })),
+  ];
+
+  const cumulativeAccepted = allResults.reduce(
+    (total, { year: resultYear, totalAccepted }) =>
+      Number(resultYear) <= Number(year) ? total + totalAccepted : total,
     0,
   );
   const topUniversities = [...yearData.universities]
