@@ -181,15 +181,15 @@ export default function NavBarSticky() {
 
   // 드롭다운 아이템
   const resultsItems: MenuItem[] = [
-    { label: "2025년 합격결과", href: "/results/2025" },
-    { label: "2024년 합격결과", href: "/results/2024" },
-    { label: "2023년 합격결과", href: "/results/2023" },
-    { label: "2022년 합격결과", href: "/results/2022" },
-    { label: "2021년 합격결과", href: "/results/2021" },
-    { label: "2020년 합격결과", href: "/results/2020" },
-    { label: "2010-2019 합격결과", href: "/results/2010-2019" },
-    { label: "2000-2009 합격결과", href: "/results/2000-2009" },
-    { label: "1991-1999 합격결과", href: "/results/1991-1999" },
+    { label: "2025년 합격 결과", href: "/results/2025" },
+    { label: "2024년 합격 결과", href: "/results/2024" },
+    { label: "2023년 합격 결과", href: "/results/2023" },
+    { label: "2022년 합격 결과", href: "/results/2022" },
+    { label: "2021년 합격 결과", href: "/results/2021" },
+    { label: "2020년 합격 결과", href: "/results/2020" },
+    { label: "2010-2019 합격 결과", href: "/results/2010-2019" },
+    { label: "2000-2009 합격 결과", href: "/results/2000-2009" },
+    { label: "1991-1999 합격 결과", href: "/results/1991-1999" },
   ];
   const galleryItems: MenuItem[] = galleryTabs.map((tab) => ({
     label: tab.label,
@@ -217,11 +217,19 @@ export default function NavBarSticky() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <ul className="h-12 md:h-14 flex items-center justify-center gap-6 md:gap-10 text-sm md:text-base">
             {/* 합격결과 드롭다운 */}
-            <Dropdown label="합격결과" items={resultsItems} widthClass="w-56" />
+            <Dropdown
+              label="합격 결과"
+              items={resultsItems}
+              widthClass="w-56"
+            />
 
             {/* 갤러리 드롭다운 */}
             <Dropdown label="갤러리" items={galleryItems} widthClass="w-48" />
-
+            <li>
+              <a href="#program" className="hover:text-brand">
+                시설 안내
+              </a>
+            </li>
             <li>
               <a href="#program" className="hover:text-brand">
                 프로그램
